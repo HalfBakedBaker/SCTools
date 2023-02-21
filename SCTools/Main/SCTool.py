@@ -13,7 +13,9 @@ import tkinter.filedialog as filedialog
 import pyautogui
 import math
 import tkinter as tk
+import multiprocessing as mp
 import keyboard
+import threading
 import time 
 #####
 ##### need to implement a function that calls the "add button" function x amount of times at the start with a empty string in order to generate 
@@ -22,13 +24,15 @@ import time
 
 
 
+
+
 class App(tk.Tk):
-    def __init__(self):
+    def __init__(self):  # Add the app window with buttons and sliders 
         super().__init__()
         self.title("SCTool")
         self.attributes('-topmost', 1)
         self.attributes('-alpha', 1)
-        self.geometry("600x550")
+        self.geometry("530x110")
         self.configure(bg="#1E1E1E")
         self.keybind_press = False
         self.keybind = "ctrl+m"
@@ -38,14 +42,43 @@ class App(tk.Tk):
         self.bind("<ButtonRelease-3>", self.stop_move)
         self.bind("<B3-Motion>", self.on_move)
 
+####################################################################################################
+####    Create frame for window setting toggle buttons 
+        WindowFrameSettings = tk.Frame(self, bg="#1E1E1E")
+
+####    ### Create Label for window settings frame 
+        title_label = tk.Label(WindowFrameSettings, text="CTRL+M", bg="#1E1E1E", fg="#FFFFFF", font=("Arial", 12, "bold"))
+        title_label.pack(side="left", padx=0)
+
+
+        ###Slider 
+        self.slider = tk.Scale(WindowFrameSettings, from_=0.2, to=1, resolution=0.1, orient="horizontal", command=self.set_transparency,showvalue=False, bg="#1E1E1E", fg="#FFFFFF", troughcolor="#565656", highlightbackground="#1E1E1E", bd=0, length=100)
+        self.slider.set(1) # Set slider value to 1 by default
+        self.slider.pack(side="left", fill="x", padx=1)
+
+        # Create and pack the toggle window mode button
+        self.is_borderless = False
+        self.toggle_mode_button = tk.Button(WindowFrameSettings, text="Toggle Window Mode", command=self.toggle_mode, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+        self.toggle_mode_button.pack(side="left", fill="x", padx=1, pady=1)
+
+        # # Create and pack the size toggle button/ side bar
+        # self.size_toggle = 0
+        # button = tk.Button(WindowFrameSettings, text="Toggle Sidebar", command=self.change_window_size, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+        # button.pack(side="left", fill="x", padx=1, pady=1)
+
+       ## # create a quit button (Requires being clicked 5 times  for safety so check click count and update)
+        self.click_count = 0
+        self.quit_button = tk.Button(WindowFrameSettings, text="EXIT GAME ({})".format(self.click_count), command=self.CheckClickCount, bg="#590000", fg="#FFFFFF", activebackground="#FF3030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+        self.quit_button.pack(side=tk.RIGHT, padx=5)
+
+ #### pack the window settings button frame 
+        WindowFrameSettings.pack(side="top", fill="x", pady=5)
+
   # create a frame to hold the template buttons 
         button_frame_template = tk.Frame(self, bg="#1E1E1E")
         button_frame_template.pack(side=tk.TOP, fill=tk.X)
 
-
-
-
-  # create a frame to hold the buttons for quit and debug 
+  # create a frame to hold the buttons for F1 F2 (Mobiglass and camera )
         button_frame_debug_quit = tk.Frame(self, bg="#1E1E1E")
         button_frame_debug_quit.pack(side=tk.TOP, fill=tk.X)
 
@@ -58,75 +91,48 @@ class App(tk.Tk):
         self.size_toggle = 0
         map_button = tk.Button(button_frame_debug_quit, text="Map", command=self.map, bg="#7a0049", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
         map_button.pack(side=tk.LEFT, padx=5)
-
+### comlink
+# create a Comlink button
+        comlink_button = tk.Button(button_frame_debug_quit, text="Comlink", command=self.comlink, bg="#7a0049", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+        comlink_button.pack(side=tk.LEFT, padx=5)
+   
 #### Camera 
         self.size_toggle = 0
         camera_button = tk.Button(button_frame_debug_quit, text="Camera", command=self.camera, bg="#7a0049", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
         camera_button.pack(side=tk.LEFT, padx=5)
 
-#### Fov + 
+      #################
 
-
-        self.size_toggle = 0
-        fov_plus_button = tk.Button(button_frame_debug_quit, text="FOV +", command=self.fov_plus, bg="#7a0049", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        fov_plus_button.pack(side=tk.LEFT, padx=5)
-
-
-#### Fov  -
-
-
-        self.size_toggle = 0
-        fov_minus_button = tk.Button(button_frame_debug_quit, text="FOV -", command=self.fov_minus, bg="#7a0049", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        fov_minus_button.pack(side=tk.LEFT, padx=5)
-
-
-### comlink
-# create a Comlink button
-        comlink_button = tk.Button(button_frame_debug_quit, text="Comlink", command=self.comlink, bg="#7a0049", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        comlink_button.pack(side=tk.LEFT, padx=5)
-
-
-
-
-        ###  # create a debug button
-        self.size_toggle = 0
-        debug_button = tk.Button(button_frame_debug_quit, text="Debug", command=self.DebugToggleSize, bg="#7a0049", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        debug_button.pack(side=tk.LEFT, padx=5)
-       ## # create a quit button (Requires being clicked 5 times  for safety so check click count and update)
-
-        self.click_count = 0
-        self.quit_button = tk.Button(button_frame_debug_quit, text="EXIT GAME ({})".format(self.click_count), command=self.CheckClickCount, bg="#590000", fg="#FFFFFF", activebackground="#FF3030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        self.quit_button.pack(side=tk.RIGHT, padx=5)
-       ### Add a label Ctrl+m to Show Hide 
-
-        label = tk.Label(button_frame_debug_quit, text="CTRL+M", bg="#1E1E1E", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        label.pack(side="left", fill="x", padx=10, pady=10)
-        
 # Pack the window settings frame
-
         button_frame_debug_quit.pack(side="top", fill="x", pady=5)
+#########################################################################
 
 
-####    Create frame for window setting toggle buttons 
-        windowSettingsToggleButton = tk.Frame(self, bg="#1E1E1E")
-        ###Slider 
-        self.slider = tk.Scale(windowSettingsToggleButton, from_=0.2, to=1, resolution=0.1, orient="horizontal", command=self.set_transparency, bg="#1E1E1E", fg="#FFFFFF", troughcolor="#565656", highlightbackground="#1E1E1E", bd=0)
-        self.slider.set(1) # Set slider value to 1 by default
 
-        self.slider.pack(side="right", fill="both", padx=1)
 
-        # Create and pack the toggle window mode button
-        self.is_borderless = False
-        self.toggle_mode_button = tk.Button(windowSettingsToggleButton, text="Toggle Window Mode", command=self.toggle_mode, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        self.toggle_mode_button.pack(side="left", fill="x", padx=1, pady=1)
+      ################# New Debug Buttons 0 - 7 
+        # create New debug buttons 
+        # create a frame for the debug buttons
+        button_frame_debug = tk.Frame(self, bg="#1F1F1F", height=50)
+        button_frame_debug.pack(side=tk.TOP, fill=tk.X, pady=(5,0))
 
-        # Create and pack the size toggle button/ side bar
-        self.size_toggle = 0
-        button = tk.Button(windowSettingsToggleButton, text="Toggle Sidebar", command=self.change_window_size, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        button.pack(side="left", fill="x", padx=1, pady=1)
+        # create a new frame for the debug buttons
+        debug_button_frame = tk.Frame(button_frame_debug, bg="#1F1F1F", height=50)
+       
+        # create the debug buttons
+        debug_names = ["debug 0", "debug 1", "debug 2", "debug 3", "debug 4", "Session QR", "Screenshot"]
+        debug_commands = ["r_displayinfo 0", "r_displayinfo 1", "r_displayinfo 2", "r_displayinfo 3", "r_displayinfo 4", "r_displaySessionInfo", "r_getScreenShot"]
+        for name, command in zip(debug_names, debug_commands):
+            debug_button = tk.Button(debug_button_frame, text=name, command=lambda cmd=command: self.DebugButtons(cmd), bg="#922178", fg="#FFFFFF", activebackground="#922178", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+            debug_button.pack(side=tk.LEFT, padx=5)
 
- #### pack the window settings button frame 
-        windowSettingsToggleButton.pack(side="top", fill="x", pady=5)
+        ### pack the debug button frame 
+        debug_button_frame.pack(side=tk.LEFT, fill=tk.X, padx=(5,0))
+    
+      
+
+
+
 
 ### functions to allow movemet of window when in borderless mode 
     def start_move(self, event):
@@ -162,7 +168,7 @@ class App(tk.Tk):
             self.geometry("470x450")
             self.size_toggle = 1
             ################################
-        else:
+        else: # Default Size 
             self.geometry("600x550")
             self.size_toggle = 0
 
@@ -230,54 +236,8 @@ class App(tk.Tk):
             pyautogui.moveTo(original_pos)
     
         self.after(1, type_button_name)
+        
 
-    def fov_plus(self):
-        def fov_increase_helper():
-            # store current mouse position
-            original_pos = pyautogui.position()
-            # move mouse to mobiglass button position and click the left mouse button
-            pyautogui.moveTo(100, 100)
-            pyautogui.click(button='left')
-            # add a delay of 0.1 second
-            time.sleep(0.1)
-            # press and hold F4 key
-            keyboard.press('f4')
-            # press + key
-            keyboard.press_and_release('plus')
-            # release F4 key
-            keyboard.release('f4')
-            # add a delay of 0.1 second
-            time.sleep(0.1)
-            # move mouse back to original position
-            pyautogui.moveTo(original_pos)
-    
-        self.after(1, fov_increase_helper)
-    
-    
-    def fov_minus(self):
-        def press_f4_minus():
-            # store current mouse position
-            original_pos = pyautogui.position()
-            # move mouse to mobiglass button position and click the left mouse button
-            pyautogui.moveTo(100, 100)
-            pyautogui.click(button='left')
-            # add a delay of 0.1 second
-            time.sleep(0.1)
-            # press and hold F4 key
-            keyboard.press('f4')
-            # add a delay of 0.1 second
-            time.sleep(0.1)
-            # press - key
-            keyboard.press_and_release('-')
-            # add a delay of 0.1 second
-            time.sleep(0.1)
-            # release F4 key
-            keyboard.release('f4')
-            # move mouse back to original position
-            pyautogui.moveTo(original_pos)
-    
-        self.after(1, press_f4_minus)
-    
     def comlink(self):
         def activate_comlink():
             # store current mouse position
@@ -296,14 +256,6 @@ class App(tk.Tk):
     
         self.after(1, activate_comlink)
     
-
-
-
-
-
-
-
-
     def template_printbuttonfunction(self, name): ## print the name of the button pressed and type to keyboard
         def type_button_name():
             # store current mouse position
@@ -379,8 +331,15 @@ class App(tk.Tk):
             # self.template_printbuttonfunction(name="r_displayinfo 4")
             self.print_button_debug(name="r_displayinfo 4")
             self.hello_printed = True
+   
+   
+   ########new debugging buttons x 7 
+    def DebugButtons(self,SCCommand):
+        name = SCCommand
+        self.print_button_debug(name)
 
-    def CheckClickCount(self):
+
+    def CheckClickCount(self):  ## allows quit button to be activated after 5 presses
         if self.click_count < 4:
             self.click_count += 1
             self.quit_button.config(text="EXIT GAME ({})".format(5 - self.click_count))
@@ -391,14 +350,10 @@ class App(tk.Tk):
     def QuitGame(self):
 
             self.print_button_quit(name="quit")
-
     
     def template(self):
             self.template_printbuttonfunction(name="Template = mouse move To (500,50) ,click, 'enter', type>Template, 'enter', returnmouse")
-   
-
-
-   
+      
     def update(self):
         self.after(10, self.update)
 
@@ -409,20 +364,4 @@ app.mainloop()
 
 
 
-############## 
-###Buttons to implement 
 
-# F1= Mobiglass
-# F2= Mobiglass>Starmap
-# F3= Nothing 
-# F4= x1 = "third person over sholder"  x2= "third person far" x3 = "first person"
-# F4 + "+" = FOV +
-# F4 + "-" = FOV -
-# F5= 
-# F6= 
-# F7= 
-# F8= 
-# F9= 
-# F10 = 
-# F11 = Mobiglass > commlink 
-# F12 = 

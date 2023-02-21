@@ -66,9 +66,9 @@ class App(tk.Tk):
         # self.slider_label = tk.Label(button_frame_debug_quit, text="Transparency", bg="#1E1E1E", mfg="#FFFFFF", font=("Arial", 10, "bold"))
         # self.slider_label.pack(side="bottom")
         ##########slider
-        self.slider = tk.Scale(button_frame_debug_quit, from_=0.2, to=1, resolution=0.1, orient="horizontal", command=self.set_transparency, bg="#1E1E1E", fg="#FFFFFF", troughcolor="#565656", highlightbackground="#1E1E1E", bd=0)
+        self.slider = tk.Scale(button_frame_debug_quit, from_=0.2, to=1, resolution=0.1, orient="horizontal", command=self.set_transparency, showvalue= False, bg="#1E1E1E", fg="#FFFFFF", troughcolor="#565656", highlightbackground="#1E1E1E", bd=0)
         self.slider.set(1) # Set slider value to 1 by default
-        self.slider.pack(side="top", fill="both", padx=1)
+        self.slider.pack(side="top", fill="both", padx=10, pady=10)
 
         # Pack the window settings frame
         button_frame_debug_quit.pack(side="top", fill="x", pady=5)
@@ -89,10 +89,13 @@ class App(tk.Tk):
 
         #### pack the window settings button frame 
         windowSettingsToggleButton.pack(side="top", fill="x", pady=5)
-#############################################################################################################^^
-        # Create and pack the open Quick Chat Tool button
-        self.button1 = tk.Button(windowSettingsToggleButton, text="SCTool", command=lambda: subprocess.Popen(["python", "SCTool.py"]), bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        self.button1.pack(side="top", padx=10, pady=10)
+
+
+#########################################################################################################
+
+        # # Create and pack the open Quick Chat Tool button
+        # self.button1 = tk.Button(windowSettingsToggleButton, text="SCTool", command=lambda: subprocess.Popen(["python", "SCTool.py"]), bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+        # self.button1.pack(side="top", padx=10, pady=10)
 
        # Create and pack the canvas that displays new buttons 
         self.canvas = tk.Canvas(self, width=300, height=300, bg="gray")
