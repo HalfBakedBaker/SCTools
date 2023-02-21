@@ -1,0 +1,7 @@
+SCToolHUB.py = Main Window 
+
+Working towards packaging all together as a .exe file
+
+untill then the only way to run is directly with python 
+
+ 
