@@ -1,13 +1,4 @@
-# ###########SCQuickChatTool V2 - HalfbakedBaker & ChatGPT
-# ###################################################
-# ## 
-# ## 
-# ## 
-# ## 
-# ## 
-# ## 
-
-
+# ###########SCQuickChatTool V2 - HalfbakedBaker 
 
 import tkinter.filedialog as filedialog
 import pyautogui
@@ -16,14 +7,9 @@ import tkinter as tk
 import keyboard
 import time 
 import subprocess
-#####
-##### need to implement a function that calls the "add button" function x amount of times at the start with a empty string in order to generate 
-##### blank buttons for each space in the grid 
-#####
 
 
-
-class App(tk.Tk):
+class App_SCQuickChat(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("SCQuickChat")
@@ -31,10 +17,6 @@ class App(tk.Tk):
         self.attributes('-alpha', 1)
         self.geometry("600x550")
         self.configure(bg="#1E1E1E")
-        
-
-        
-        
         self.keybind_press = False
         self.keybind = "<+m"
         keyboard.add_hotkey(self.keybind, self.handle_keybind_press)
@@ -43,23 +25,9 @@ class App(tk.Tk):
         self.bind("<ButtonPress-3>", self.start_move)
         self.bind("<ButtonRelease-3>", self.stop_move)
         self.bind("<B3-Motion>", self.on_move)
-                  # Get screen width and height
-        # screen_width = self.winfo_screenwidth()
-        # screen_height = self.winfo_screenheight()
-        
-        # # Set window position
-        # window_width = 750
-        # window_height = 90
-        # window_x = screen_width - window_width
-        # window_y = screen_height - window_height
-        # self.geometry(f"{window_width}x{window_height}+{window_x}+{window_y}")
-        
-
 
 ##################################################################
   
-
-
 # create a frame to hold the buttons for quit and debug 
         button_frame_debug_quit = tk.Frame(self, bg="#1E1E1E")
         button_frame_debug_quit.pack(side=tk.TOP, fill=tk.X)
@@ -365,13 +333,9 @@ class App(tk.Tk):
         self.after(10, self.update)
   
 
-app = App()
+app = App_SCQuickChat()
 app.update()
 app.mainloop()
 
 
-#### function to call other function 16 times 
 
-
-
-# ########################################################

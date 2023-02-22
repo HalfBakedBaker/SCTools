@@ -1,12 +1,5 @@
 # ###########SC Tool  
 # ###################################################
-# ## 
-# ## 
-# ## 
-# ## 
-# ## 
-# ## 
-
 
 
 import tkinter.filedialog as filedialog
@@ -17,13 +10,8 @@ import multiprocessing as mp
 import keyboard
 import threading
 import time 
-#####
 
-
-
-
-
-class App(tk.Tk):
+class App_SCTool(tk.Tk):
     def __init__(self):  # Add the app window with buttons and sliders 
         super().__init__()
         self.title("SCTool")
@@ -31,7 +19,7 @@ class App(tk.Tk):
         self.attributes('-alpha', 1)
         self.geometry("750x90")
 
-        # Get screen width and height
+        # Get screen width and heightm,
         screen_width = self.winfo_screenwidth()
         screen_height = self.winfo_screenheight()
 
@@ -40,7 +28,7 @@ class App(tk.Tk):
         y = screen_height - 90 # 90 is the window height
 
         # Set the window position
-        self.geometry("+{}+{}".format(x, y))
+        self.geometry("600x90+{}+{}".format(x, y))
 
         self.configure(bg="#1E1E1E")
 
@@ -106,7 +94,7 @@ class App(tk.Tk):
 
         # Create and pack the toggle window mode button
         self.is_borderless = False
-        self.toggle_mode_button = tk.Button(WindowFrameSettings, text="Toggle Window Mode", command=self.toggle_mode, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+        self.toggle_mode_button = tk.Button(WindowFrameSettings, text="Window Mode", command=self.toggle_mode, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
         self.toggle_mode_button.pack(side="right", fill="x", padx=1, pady=1)
         ###Slider 
         self.slider = tk.Scale(WindowFrameSettings, from_=0.2, to=1, resolution=0.1, orient="horizontal", command=self.set_transparency,showvalue=False, bg="#1E1E1E", fg="#FFFFFF", troughcolor="#565656", highlightbackground="#1E1E1E", bd=0, length=100)
@@ -377,20 +365,9 @@ class App(tk.Tk):
         self.after(10, self.update)
 
 
-app = App()
+app = App_SCTool()
 app.update()
 app.mainloop()
-
-
-# # # ###//////////////////////////////////////////////////////////////////###
-
-
-
-
-
-
-
-
 
 
 

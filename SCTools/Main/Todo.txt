@@ -3,13 +3,7 @@
 ########### todo
 enable scaling in borderles mode
 
-open in borderless mode
-
-open webpages in default browser 
-
 Set Keybind from record / input ?
-
-consolodate into one app / exe 
 
 put all in master scaleable frame that scales contents 
 

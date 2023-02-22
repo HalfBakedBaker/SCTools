@@ -1,10 +1,6 @@
 # # # ###########SCToolHUB V2 - HalfbakedBaker & ChatGPT
 
 
-# # ######## HUB 
-
-
-
 
 import tkinter as tk
 import subprocess
@@ -13,26 +9,32 @@ import multiprocessing as mp
 import webbrowser
 from tkinter import *
 
-def openwebpage(Url):
-    # # Open website Legacy using tkinter webview window 
-    # webview.create_window(Url, Url,on_top=True,frameless=False,draggable=True,resizable=True,easy_drag=True,zoomable=True)
-    # webview.start()
-##### Better way 
-    webbrowser.open(Url)
-    
-def openwebpage_process(Url):
-    # Start a new process to open the webpage
-    p = mp.Process(target=openwebpage, args=(Url,))
-    p.start()
 
-class App(tk.Tk):
+def openquickchat():
+    from SCQuickChat_V2 import App_SCQuickChat
+    app = App_SCQuickChat()
+    app.mainloop()
+
+def openSCTool():
+    from SCTool import App_SCTool
+    app = App_SCTool()
+    app.mainloop()
+
+def openwebpage_process(Url):
+    # # Start a new process to open the webpage
+    # p = mp.Process(target=openwebpage, args=(Url,))
+    # p.start()
+    webbrowser.open(Url)
+
+class App_HUB(tk.Tk):
     def __init__(self):
         super().__init__()
+
         self.title("SCToolHub")
         self.is_borderless = False
         self.attributes('-topmost', 1) # Force window above all others
         self.attributes('-alpha', 1) # Set default transparency to 1
-        self.geometry("1050x25")
+        self.geometry("1080x25")
         self.create_widgets()
          # Bind right mouse button to drag the window
         self.bind("<ButtonPress-3>", self.start_move)
@@ -48,8 +50,8 @@ class App(tk.Tk):
         y = 0 # Place the window at the top of the screen
         
         # Set the window position
-        self.geometry("1050x25+{}+{}".format(x, y))
-        
+        self.geometry("1070x25+{}+{}".format(x, y))
+       
     def create_widgets(self):
 
 ######## SC Tool Tool Bar
@@ -63,31 +65,34 @@ class App(tk.Tk):
         # Pack the label and web buttons frame
         label.pack(side="left", padx=1, pady=1)
         web_buttons.pack(side="top", fill="x")
+
+
         # Create and pack the open Quick Chat Tool button
-        self.button0 = tk.Button(web_buttons, text="ChatTool", command=lambda: subprocess.Popen(["python", "SCQuickChat_V2.py"]), bg="#321977", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        self.button0.pack(side="left", padx=1, pady=1)
+        self.button0 = tk.Button(web_buttons, text="ChatTool", command=openquickchat, bg="#321977", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+        self.button0.pack(side="left", padx=4, pady=1)
         # Create and pack the open SCTool button
-        self.button1 = tk.Button(web_buttons, text="SCTool", command=lambda: subprocess.Popen(["python", "SCTool.py"]), bg="#321977", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        self.button1.pack(side="left", padx=1, pady=1)
+        self.button1 = tk.Button(web_buttons, text="SCTool", command=openSCTool, bg="#321977", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+        self.button1.pack(side="left", padx=4, pady=1)
 
-
-
+        # Create and pack the open Website 0 button
+        self.button9 = tk.Button(web_buttons, text="Issue Council", command=lambda: openwebpage_process(Url="https://issue-council.robertsspaceindustries.com"), bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+        self.button9.pack(side="left", padx=4, pady=1)
 
         # Create and pack the open Website 1 button
         self.button2 = tk.Button(web_buttons, text="Spectrum", command=lambda: openwebpage_process(Url="https://robertsspaceindustries.com/spectrum"), bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        self.button2.pack(side="left", padx=1, pady=1)
+        self.button2.pack(side="left", padx=4, pady=1)
         # Create and pack the other website buttons 
         self.button3 = tk.Button(web_buttons, text="erkul DPS", command=lambda: openwebpage_process(Url="https://www.erkul.games"), bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        self.button3.pack(side="left", padx=1, pady=1)
+        self.button3.pack(side="left", padx=4, pady=1)
         # Create and pack the other website buttons 
         self.button4 = tk.Button(web_buttons, text="Scodex", command=lambda:openwebpage_process(Url="https://scodex.garga.net"), bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        self.button4.pack(side="left", padx=1, pady=1)
+        self.button4.pack(side="left", padx=4, pady=1)
         # Create and pack the other website buttons 
         self.button5 = tk.Button(web_buttons, text="SCWiki", command=lambda:openwebpage_process(Url="https://starcitizen.tools"), bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        self.button5.pack(side="left", padx=1, pady=1)
+        self.button5.pack(side="left", padx=4, pady=1)
         # Create and pack the other website buttons 
         self.button6 = tk.Button(web_buttons, text="EUXTrade", command=lambda:openwebpage_process(Url="https://uexcorp.space"), bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        self.button6.pack(side="left", padx=1, pady=1)
+        self.button6.pack(side="left", padx=4, pady=1)
         # # Create and pack the other website buttons 
         # self.button7 = tk.Button(web_buttons, text="IssueCouncil", command=lambda:openwebpage_process(Url="https://www.Google.com"), bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
         # self.button7.pack(side="left", padx=10, pady=10)
@@ -99,7 +104,7 @@ class App(tk.Tk):
         
         # Create the Search Google Button
         self.button8 = tk.Button(web_buttons, text="Search", command=lambda:openwebpage_process(Url="https://www.google.com/search?q=" + self.text_input.get()), bg="#007E9E", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        self.button8.pack(side="left", padx=1, pady=1)
+        self.button8.pack(side="left", padx=4, pady=1)
         
         
 
@@ -126,7 +131,7 @@ class App(tk.Tk):
         self.slider.pack(side="right", fill="x", padx=0, pady=0)
         # Button to toggle window mode
         self.mode_button = tk.Button(web_buttons, text="Borderless", command=self.toggle_mode, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        self.mode_button.pack(side="right", fill="x", padx=1, pady=1)
+        self.mode_button.pack(side="right", fill="x", padx=4, pady=1)
 
         # Pack the window settings frame
         window_settings.pack(side="top", fill="x", padx=1, pady=1)
@@ -157,12 +162,11 @@ class App(tk.Tk):
         x = self.winfo_x() + deltax
         y = self.winfo_y() + deltay
         self.geometry(f"+{x}+{y}")
-###
-
   
 if __name__ == "__main__":
-    app = App()
-    app.mainloop()
+
+    App_HUB = App_HUB()
+    App_HUB.mainloop()
 
 
 
@@ -172,17 +176,3 @@ if __name__ == "__main__":
 
 
 
-
-
-##################### Search google Text Example 
-
-# def search(query):
-#     base_url = "https://www.google.com/search?q="
-#     query_url = base_url + query.replace(" ", "+")
-#     print(query_url)
-
-
-# search(query="potato")
-
-
- #### To Do . Merge all apps into the hub instead of calling external scripts?
