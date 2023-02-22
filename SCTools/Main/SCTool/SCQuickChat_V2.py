@@ -31,6 +31,10 @@ class App(tk.Tk):
         self.attributes('-alpha', 1)
         self.geometry("600x550")
         self.configure(bg="#1E1E1E")
+        
+
+        
+        
         self.keybind_press = False
         self.keybind = "<+m"
         keyboard.add_hotkey(self.keybind, self.handle_keybind_press)
@@ -39,6 +43,17 @@ class App(tk.Tk):
         self.bind("<ButtonPress-3>", self.start_move)
         self.bind("<ButtonRelease-3>", self.stop_move)
         self.bind("<B3-Motion>", self.on_move)
+                  # Get screen width and height
+        # screen_width = self.winfo_screenwidth()
+        # screen_height = self.winfo_screenheight()
+        
+        # # Set window position
+        # window_width = 750
+        # window_height = 90
+        # window_x = screen_width - window_width
+        # window_y = screen_height - window_height
+        # self.geometry(f"{window_width}x{window_height}+{window_x}+{window_y}")
+        
 
 
 ##################################################################
@@ -48,24 +63,6 @@ class App(tk.Tk):
 # create a frame to hold the buttons for quit and debug 
         button_frame_debug_quit = tk.Frame(self, bg="#1E1E1E")
         button_frame_debug_quit.pack(side=tk.TOP, fill=tk.X)
-#### redacted debug button as in SCTool
-        # ###  # create a debug button
-        # self.size_toggle = 0
-        # debug_button = tk.Button(button_frame_debug_quit, text="Debug", command=self.DebugToggle, bg="#7a0049", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        # debug_button.pack(side=tk.LEFT, padx=5)
-
-    #    ## # create a quit button
-    #     self.click_count = 0
-    #     self.quit_button = tk.Button(button_frame_debug_quit, text="EXIT GAME ({})".format(self.click_count), command=self.CheckClickCount, bg="#590000", fg="#FFFFFF", activebackground="#FF3030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-    #     self.quit_button.pack(side=tk.RIGHT, padx=5)
-    #    ### Add a label Ctrl+m to Show Hide 
-    #     label = tk.Label(button_frame_debug_quit, text="<+M", bg="#1E1E1E", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-    #     label.pack(side="left", fill="x", padx=10, pady=10)
-
-        # #### Slider Transparency Label 
-        # self.slider_label = tk.Label(button_frame_debug_quit, text="Transparency", bg="#1E1E1E", mfg="#FFFFFF", font=("Arial", 10, "bold"))
-        # self.slider_label.pack(side="bottom")
-        ##########slider
         self.slider = tk.Scale(button_frame_debug_quit, from_=0.2, to=1, resolution=0.1, orient="horizontal", command=self.set_transparency, showvalue= False, bg="#1E1E1E", fg="#FFFFFF", troughcolor="#565656", highlightbackground="#1E1E1E", bd=0)
         self.slider.set(1) # Set slider value to 1 by default
         self.slider.pack(side="top", fill="both", padx=10, pady=10)
@@ -93,9 +90,6 @@ class App(tk.Tk):
 
 #########################################################################################################
 
-        # # Create and pack the open Quick Chat Tool button
-        # self.button1 = tk.Button(windowSettingsToggleButton, text="SCTool", command=lambda: subprocess.Popen(["python", "SCTool.py"]), bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        # self.button1.pack(side="top", padx=10, pady=10)
 
        # Create and pack the canvas that displays new buttons 
         self.canvas = tk.Canvas(self, width=300, height=300, bg="gray")
@@ -140,7 +134,11 @@ class App(tk.Tk):
 
         # array to store the button names
         self.button_names = []
-   
+        ### config
+        self.toggle_mode() # set window mode borderless at start 
+        self.loadStart() # load config 
+
+
 
 ### functions to allow movemet of window when in borderless mode 
     def start_move(self, event):
@@ -312,6 +310,22 @@ class App(tk.Tk):
             button_name = button_name.strip()  # Remove newline character from end of line
             self.add_button(button_name=button_name)  # Call add_button function with button_name argument
 
+    def loadStart(self):   ## load buttons from text file 
+        # Prompt the user to select a text file
+        file_path = filedialog.askopenfilename()
+        if file_path != '':
+            # self.deleteall_buttons()
+            # Read the button names from the file
+            with open(file_path, 'r') as f:
+                button_names = f.readlines()
+
+            # Add a button for each name read from the file
+            for button_name in button_names:
+                button_name = button_name.strip()  # Remove newline character from end of line
+                self.add_button(button_name=button_name)
+
+  
+
     def save(self):  # save buttons 
         # Prompt the user for the save file path
         file_path = filedialog.asksaveasfilename(defaultextension='.txt')
@@ -349,7 +363,7 @@ class App(tk.Tk):
    
     def update(self):
         self.after(10, self.update)
-
+  
 
 app = App()
 app.update()
