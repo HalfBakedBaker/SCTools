@@ -1,20 +1,9 @@
 # # # ###########SCToolHUB V2 - HalfbakedBaker & ChatGPT
-# # # ###################################################
-# # # ## Add GUI with tkinter Forced above all other windows 
-# # # ## Add frame " Frame A"
-# # # ## Add Buttons to frame  x N
-# # # ## add frame " Frame B"
-# # # ## add slider to frame - changes transparency of window
-# # # ## add button to frame - span full width of frame - button toggles window / frameless mode
-# # # ## Use Background color of "#1E1E1E" and font of font=("Arial", 10, "bold")
 
-# # ############################# Version A ###### 
 
-# # ######## HUB A 
+# # ######## HUB 
 
-# #### Need to implement a keybind system for this similar to the Quick Chat "Ctrl T"
 
-# # Opens Websites in Python GUI & allows user to open python script(QuickChatV2)
 
 
 import tkinter as tk
@@ -167,9 +156,11 @@ if __name__ == "__main__":
 
 
 
-##################### Search google Text 
 
 
+
+
+##################### Search google Text Example 
 
 # def search(query):
 #     base_url = "https://www.google.com/search?q="
@@ -178,3 +169,6 @@ if __name__ == "__main__":
 
 
 # search(query="potato")
+
+
+ #### To Do . Merge all apps into the hub instead of calling external scripts?

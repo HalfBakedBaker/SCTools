@@ -32,7 +32,7 @@ class App(tk.Tk):
         self.geometry("600x550")
         self.configure(bg="#1E1E1E")
         self.keybind_press = False
-        self.keybind = "ctrl+m"
+        self.keybind = "<+m"
         keyboard.add_hotkey(self.keybind, self.handle_keybind_press)
         
         # Bind right mouse button to drag the window around 
@@ -48,19 +48,19 @@ class App(tk.Tk):
 # create a frame to hold the buttons for quit and debug 
         button_frame_debug_quit = tk.Frame(self, bg="#1E1E1E")
         button_frame_debug_quit.pack(side=tk.TOP, fill=tk.X)
+#### redacted debug button as in SCTool
+        # ###  # create a debug button
+        # self.size_toggle = 0
+        # debug_button = tk.Button(button_frame_debug_quit, text="Debug", command=self.DebugToggle, bg="#7a0049", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+        # debug_button.pack(side=tk.LEFT, padx=5)
 
-        ###  # create a debug button
-        self.size_toggle = 0
-        debug_button = tk.Button(button_frame_debug_quit, text="Debug", command=self.DebugToggle, bg="#7a0049", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        debug_button.pack(side=tk.LEFT, padx=5)
-
-       ## # create a quit button
-        self.click_count = 0
-        self.quit_button = tk.Button(button_frame_debug_quit, text="EXIT GAME ({})".format(self.click_count), command=self.CheckClickCount, bg="#590000", fg="#FFFFFF", activebackground="#FF3030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        self.quit_button.pack(side=tk.RIGHT, padx=5)
-       ### Add a label Ctrl+m to Show Hide 
-        label = tk.Label(button_frame_debug_quit, text="CTRL+M", bg="#1E1E1E", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        label.pack(side="left", fill="x", padx=10, pady=10)
+    #    ## # create a quit button
+    #     self.click_count = 0
+    #     self.quit_button = tk.Button(button_frame_debug_quit, text="EXIT GAME ({})".format(self.click_count), command=self.CheckClickCount, bg="#590000", fg="#FFFFFF", activebackground="#FF3030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+    #     self.quit_button.pack(side=tk.RIGHT, padx=5)
+    #    ### Add a label Ctrl+m to Show Hide 
+    #     label = tk.Label(button_frame_debug_quit, text="<+M", bg="#1E1E1E", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+    #     label.pack(side="left", fill="x", padx=10, pady=10)
 
         # #### Slider Transparency Label 
         # self.slider_label = tk.Label(button_frame_debug_quit, text="Transparency", bg="#1E1E1E", mfg="#FFFFFF", font=("Arial", 10, "bold"))
