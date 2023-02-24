@@ -1,0 +1,21 @@
+
+
+########### todo
+
+Fix Hub calling SCTool+SCChat multiple times. add button 
+to quick chat to open new instance 
+
+Buttons on hub should toggle visibility of the apps 
+
+Apps should be run & toggled to be hidden on 
+launch using their keybindfunctions 
+
+
+enable scaling in borderles mode
+
+Set Keybind from record / input ?
+
+put all in master scaleable frame that scales contents 
+
+theme SC
+

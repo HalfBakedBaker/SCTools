@@ -2,7 +2,7 @@
 
 This is a quick 'half baked' implementation of some tools for Star Citizen in Windows 
 
-Keybind to show hide menus is "< + m"  
+Keybind to show hide menus is "< + m"  (can be buggy am working on it)
 
 SCHUB = menu with buttons that allows the user to open SCQuickChat, SCTools & Quick Launch usefull websites related to SC at click of button.
 
