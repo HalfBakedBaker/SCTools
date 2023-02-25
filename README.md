@@ -2,14 +2,15 @@
 
 This is a quick 'half baked' implementation of some tools for Star Citizen in Windows 
 
-Keybind to show hide menus is "< + m"  (can be buggy am working on it)
+Keybind to show hide Tools & Quick chat menu  is "< + m" , Hub will always be open ( select window mode and minimize from there if you wish to hide it ) 
 
-SCHUB = menu with buttons that allows the user to open SCQuickChat, SCTools & Quick Launch usefull websites related to SC at click of button.
+SCHUB = menu with buttons that allows the user to open SCQuickChat, SCTools & Quick Launch usefull websites related to SC.
 
-SCQuickChat = Allow User to specify names for buttons that when pressed type and enter the name of the button as a message into in game chat. 
+SCQuickChat = Allow User to quickly send a pre defined message in chat at click of button.  
 
 save / load buttons to a text file that can be later be loaded.
-the user can open mutiple instances of the Quick Chat Tool to have as many buttons as they like 
+   the user can open mutiple instances of the Quick Chat Tool to have as many buttons as they like ### TODO Improve scaling for buttons as right now you cant change the size. 
+
 
 SCTool = Open menu with pre made buttons for the following 
     Mobi Glass 
@@ -17,7 +18,7 @@ SCTool = Open menu with pre made buttons for the following
     map
     Camera
     Debug 0,1,2,3,4,sessioninfo,screenshot
-    exit (after 5 clicks)
+    exit (after 5 clicks) ( types `quit[enter] into console ) 
     
     
 
