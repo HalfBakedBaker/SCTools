@@ -11,6 +11,7 @@ import os
 
 
 class App_SCQuickChat(tk.Tk):
+    
     def __init__(self):
         super().__init__()
         self.title("SCQuickChat")
@@ -19,6 +20,8 @@ class App_SCQuickChat(tk.Tk):
         self.geometry("600x550")
         self.configure(bg="#1E1E1E")
 
+        
+
         # Get screen width and height
         screen_width = self.winfo_screenwidth()
         screen_height = self.winfo_screenheight()
@@ -26,20 +29,19 @@ class App_SCQuickChat(tk.Tk):
         # Set the window width and height
         window_width = 600
         window_height = 550
+        
 
         # Set the window position to the right of the screen
-        window_x_position = screen_width - window_width
-        window_y_position = 0
+        window_x_position = 1550#screen_width - window_width
+        window_y_position = 500
 
         # Set the geometry of the window
         self.geometry(f"{window_width}x{window_height}+{window_x_position}+{window_y_position}")
 
 
-
-
         self.keybind_press = False
         self.keybind = "<+m"
-        keyboard.add_hotkey(self.keybind, self.handle_keybind_press)
+        keyboard.add_hotkey(self.keybind, self.handle_keybind_press,)
         
         # Bind right mouse button to drag the window around 
         self.bind("<ButtonPress-3>", self.start_move)
@@ -50,50 +52,61 @@ class App_SCQuickChat(tk.Tk):
 ##################################################################
   
 # create a frame to hold the buttons for quit and debug 
+        sliderwidth =  350
         DefaultSliderValue = .7
         button_frame_debug_quit = tk.Frame(self, bg="#1E1E1E")
         button_frame_debug_quit.pack(side=tk.TOP, fill=tk.X)
-        self.slider = tk.Scale(button_frame_debug_quit, from_=0.2, to=1, resolution=0.1, orient="horizontal", command=self.set_transparency, showvalue= False, bg="#1E1E1E", fg="#FFFFFF", troughcolor="#565656", highlightbackground="#1E1E1E", bd=0)
+        self.slider = tk.Scale(button_frame_debug_quit, from_=0.2, to=1,width=10, resolution=0.1, orient="horizontal", command=self.set_transparency, showvalue=False, bg="#1E1E1E", fg="#FFFFFF", troughcolor="#565656", highlightbackground="#1E1E1E", bd=0, length=sliderwidth)
         self.slider.set(DefaultSliderValue) # Set slider value to 1 by default
-        self.slider.pack(side="top", fill="both", padx=10, pady=10)
+        self.slider.pack(side="right",  padx=10, pady=1)
+
+
 
         # Pack the window settings frame
-        button_frame_debug_quit.pack(side="top", fill="x", pady=5)
-
+        button_frame_debug_quit.pack(side="top", fill="x", pady=2)
 
 
 ####    Create frame for window setting toggle buttons 
         windowSettingsToggleButton = tk.Frame(self, bg="#1E1E1E")
 
+        # Create CloseApp button
+
+        self.load_button = tk.Button(windowSettingsToggleButton, text="QuitApp", command=self.CloseApp, bg="#590000", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+        self.load_button.pack(side="right", fill="x", padx=10, pady=2)
+     
+
+
+
         # Create and pack the toggle window mode button
         self.is_borderless = False
-        self.toggle_mode_button = tk.Button(windowSettingsToggleButton, text="Toggle Window Mode", command=self.toggle_mode, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        self.toggle_mode_button.pack(side="left", fill="x", padx=1, pady=1)
+        self.toggle_mode_button = tk.Button(windowSettingsToggleButton, text="Window Mode", command=self.toggle_mode, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+        self.toggle_mode_button.pack(side="right", fill="x", padx=4, pady=2)
         
- 
+  
+        ### Hide 
+        button = tk.Button(windowSettingsToggleButton, text="Hide(<+m)", command=self.handle_keybind_press, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+        button.pack(side="right", fill="x", padx=4, pady=1)
+        #### pack the window settings button frame m,
+        windowSettingsToggleButton.pack(side="top", fill="x", pady=2)
         
         
         # Create and pack the size toggle button/ side bar
         self.size_toggle = 0
-        button = tk.Button(windowSettingsToggleButton, text="Toggle Sidebar", command=self.change_window_size, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        button.pack(side="left", fill="x", padx=1, pady=1)
+        button = tk.Button(windowSettingsToggleButton, text="Sidebar", command=self.change_window_size, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+        button.pack(side="right", fill="x", padx=4, pady=2)
 
         #### pack the window settings button frame 
-        windowSettingsToggleButton.pack(side="top", fill="x", pady=5)
+        windowSettingsToggleButton.pack(side="top", fill="x", pady=2)
 
         
-  
-        button = tk.Button(windowSettingsToggleButton, text="Hide - '<+m' to show", command=self.handle_keybind_press, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        button.pack(side="right", fill="x", padx=1, pady=1)
-        #### pack the window settings button frame m,
-        windowSettingsToggleButton.pack(side="top", fill="x", pady=5)
+
 
 #########################################################################################################
 
 
        # Create and pack the canvas that displays new buttons 
         self.canvas = tk.Canvas(self, width=300, height=300, bg="gray")
-        self.canvas.pack(side="left", fill="both", expand=True)
+        self.canvas.pack(side="right", fill="both", expand=True)
 
         # Create and pack the "Enter Text" label
         label = tk.Label(self, text="Enter Text", bg="#1E1E1E", fg="#FFFFFF", font=("Arial", 10, "bold"))
@@ -122,30 +135,29 @@ class App_SCQuickChat(tk.Tk):
         # Create saveDefault button
         save_button_Default = tk.Button(self, text="Save Default", command=self.saveDefault, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
         save_button_Default.pack(side="top", fill="x", padx=10, pady=10)
+        # Create loadDefault button
+        load_button_Default = tk.Button(self, text="Load  Default", command=self.loadDefault, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+        load_button_Default.pack(side="top", fill="x", padx=10, pady=10)
 
         # Create load button
         load_button = tk.Button(self, text="Load", command=self.load, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
         load_button.pack(side="top", fill="x", padx=10, pady=10)
 
-        # Create CloseApp button
-        load_button = tk.Button(self, text="QuitApp", command=self.CloseApp, bg="#590000", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        load_button.pack(side="top", fill="x", padx=10, pady=10)
-     
+
         # Create and pack the listbox for the buttons
         self.button_listbox = tk.Listbox(self, bg="#565656", fg="#FFFFFF", highlightbackground="#1E1E1E", bd=0, font=("Arial", 10, "bold"))
         self.button_listbox.pack(side="left", fill="both", expand=True)
         
         #### Define Varibles
     
-        ## updates buttons added to circle 
+        ## updates buttons added to grid
         self.current_buttons = []
 
         # array to store the button names
         self.button_names = []
         ### config
-        self.toggle_mode() # set window mode borderless at start 
-        self.loadStart() # load config 
-        
+
+        self.Pos = (20,250) ### set location for mouse to move too to execute print functions in chat 
 
 
 
@@ -184,16 +196,29 @@ class App_SCQuickChat(tk.Tk):
             print("QuickChatVisible")
             self.after(0, lambda: pyautogui.moveTo(self.winfo_rootx() + self.winfo_width() / 2, self.winfo_rooty() + self.winfo_height() / 2))
           
-    def change_window_size(self): ## Toggle window size button
-        # button_name = ""
-        # toggle between two different window sizes
+    def change_window_size(self):
+        # toggle between two different window sizes and move the window left or right
+        MoveAmount = (150)
         if self.size_toggle == 0:
-            self.geometry("470x450")
+            self.geometry("350x550")
+            self.geometry("+{}+{}".format(self.winfo_x() + MoveAmount, self.winfo_y()))
             self.size_toggle = 1
-            ################################
+        else:
+            self.geometry("500x550")
+            self.geometry("+{}+{}".format(self.winfo_x() - MoveAmount, self.winfo_y()))
+            self.size_toggle = 0
+            
+    def change_window_sizeStart(self):
+        # toggle between two different window sizes and move the window left or right
+        if self.size_toggle == 0:
+            self.geometry("350x550")
+         
+            self.size_toggle = 1
         else:
             self.geometry("600x550")
+           
             self.size_toggle = 0
+
 
     def set_transparency(self, value): # Set transparanecy value from slider
         self.attributes('-alpha', float(value))
@@ -206,39 +231,64 @@ class App_SCQuickChat(tk.Tk):
             self.overrideredirect(False)
         self.attributes("-topmost", 1)
 ###############################################################################
-#############################  #Original Add button Function 
+# #############################  Add buttons Function  (quick chat )
 
-    def add_button(self, button_name=None, max_columns=4):#### add new button to grid 
+    #################################################################################
+    def add_button(self, button_name=None, max_columns=4):
         maxentry = 40 ## define max amount of buttons
+        buttonwrapleng = 80
+        buttonwidth = 8
+        buttonheight = 4
+        ypad = 4
+        xpad = 4
+        
+        
         if not button_name:
             button_name = self.button_name_entry.get()
+        
         if button_name:
             if len(self.current_buttons) >= maxentry:
                 print("Reached Limit of", maxentry, "entries")
                 return
-            button = tk.Button(self.canvas, text=button_name, command=lambda name=button_name: self.print_button_name(name),
-                           bg="#F8F8F8", fg="#000000", activebackground="#014214", activeforeground="#000000",
-                            relief="flat", font=("Arial", 8, "bold"), width=8, height=4, wraplength=80, padx= 10,pady=10) # set wraplength to 80 pixels
+            
+            button = tk.Button(self.canvas, text=button_name, command=lambda name=button_name: self.print_button_name(name,self.Pos),
+                            bg="#F8F8F8", fg="#000000", activebackground="#014214", activeforeground="#000000",
+                            relief="flat", font=("Arial", 8, "bold"), width=buttonwidth, height=buttonheight,
+                            wraplength=buttonwrapleng, padx=xpad, pady=ypad)
+            
             button.config(width=10, height=3) ### set the uniform size for new buttons 
+            
             self.current_buttons.append(button)
             self.button_listbox.insert("end", button_name)
+            
             num_buttons = len(self.current_buttons)
             rows = int(math.ceil(num_buttons / max_columns))
             cols = min(num_buttons, max_columns)
-            padding = 10
+            padding = 2 ## Grid padding between butttons 
+            
+            # Clear existing grid
+            for widget in self.canvas.grid_slaves():
+                widget.grid_forget()
+            
+            # Rebuild grid with updated number of rows and columns
             for i, b in enumerate(self.current_buttons):
                 row = i // cols
                 col = i % cols
                 b.grid(row=row, column=col, padx=padding, pady=padding)
+            
+            # Make sure the canvas resizes with the window
+            self.canvas.grid_rowconfigure(rows, weight=1)
+            self.canvas.grid_columnconfigure(cols, weight=1)
+            self.canvas.pack(side="right")
 
-    #################################################################################
 
-    def print_button_name(self, name): ## print the name of the button pressed and type to keyboard
+###############################################################################
+    def print_button_name(self, name,pos): ## print the name of the button pressed and type to keyboard
         def type_button_name():
             # store current mouse position
             original_pos = pyautogui.position()
             # move mouse outside of window and click the left mouse button
-            pyautogui.moveTo(500,50)
+            pyautogui.moveTo(*pos)
             pyautogui.click(button='left')
             # press enter
             keyboard.press_and_release('enter')
@@ -254,52 +304,6 @@ class App_SCQuickChat(tk.Tk):
 
         self.after(1, type_button_name)
 
-    def print_button_debug(self, name): ## Enables Debugging in SC 
-        def print_button_debug():
-            # store current mouse position
-            original_pos = pyautogui.position()
-            # move mouse outside of window and click the left mouse button
-            pyautogui.moveTo(500,50)
-            pyautogui.click(button='left')
-            # press ``
-            keyboard.press_and_release('`')
-            # add a delay of 1 second
-            time.sleep(0.02)
-            # type out the name of the button (type out the letters)
-            pyautogui.typewrite(name)
-            # add a delay of 1 second
-            time.sleep(0.02)
-            keyboard.press_and_release('enter')
-            # add a delay of 1 second
-            time.sleep(0.02)
-            # press ``
-            keyboard.press_and_release('`')
-            # move mouse back to original position
-            pyautogui.moveTo(original_pos)
-
-        self.after(1, print_button_debug)
-
-    def print_button_quit(self,name): ## Quickly Quits the game Need to implement a counter so it exits after multiple clicks to avoid mistakes 
-        
-        def print_button_quit():
-          # store current mouse position
-            original_pos = pyautogui.position()
-            # move mouse outside of window and click the left mouse button
-            pyautogui.moveTo(500,50)
-            pyautogui.click(button='left')
-            # press ``
-            keyboard.press_and_release('`')
-            # add a delay of 1 second
-            time.sleep(0.02)
-            # type out the name of the button (type out the letters)
-            pyautogui.typewrite(name)
-            # add a delay of 1 second
-            time.sleep(0.02)
-            keyboard.press_and_release('enter')
-            # move mouse back to original position           
-            pyautogui.moveTo(original_pos)
-        self.after(1, print_button_quit)
-
     def deleteall_buttons(self): ### delete all buttons 
         for button in self.current_buttons:
             button.destroy()
@@ -314,6 +318,9 @@ class App_SCQuickChat(tk.Tk):
             self.current_buttons.remove(button_to_delete)
             self.button_listbox.delete(selected_index)
             
+
+
+  ###########################################################################################
     def load(self):   ## load buttons from text file 
         # Prompt the user to select a text file
         file_path = filedialog.askopenfilename()
@@ -331,10 +338,6 @@ class App_SCQuickChat(tk.Tk):
             button_name = button_name.strip()  # Remove newline character from end of line
             self.add_button(button_name=button_name)  # Call add_button function with button_name argument
 
-
-
-  ###########################################################################################
-
     def loadStart(self):   ## load buttons from text file 
         # Look for the "Default" file in the "Saves" folder
         default_file_path = os.path.join("Saves", "Default.txt")
@@ -351,6 +354,22 @@ class App_SCQuickChat(tk.Tk):
             button_name = button_name.strip()  # Remove newline character from end of line
             self.add_button(button_name=button_name)
 
+    def loadDefault(self):   ## load buttons from text file 
+        # Look for the "Default" file in the "Saves" folder
+        self.deleteall_buttons()
+        default_file_path = os.path.join("Saves", "Default.txt")
+        if not os.path.exists(default_file_path):
+            print("No Default Save")
+            return
+
+        # Read the button names from the "Default" file
+        with open(default_file_path, 'r') as f:
+            button_names = f.readlines()
+
+        # Add a button for each name read from the file
+        for button_name in button_names:
+            button_name = button_name.strip()  # Remove newline character from end of line
+            self.add_button(button_name=button_name)
 
   ###########################################################################################
     def save(self):  # save buttons 
@@ -366,7 +385,7 @@ class App_SCQuickChat(tk.Tk):
             for button in self.current_buttons:
                 f.write(button.cget('text') + '\n')
         print('Saved current buttons to file:', file_path)
-  ###########################################################################################
+    
     def saveDefault(self):  # save buttons 
         # Save the file in the "Saves" folder with the name "Default.txt"
         save_folder = "Saves"
@@ -379,7 +398,7 @@ class App_SCQuickChat(tk.Tk):
             for button in self.current_buttons:
                 f.write(button.cget('text') + '\n')
         print('Saved Current As Default:', file_path)
-
+  ###########################################################################################
   ###########################################################################################
 
     def DebugToggle(self):
@@ -418,8 +437,9 @@ class App_SCQuickChat(tk.Tk):
 
 app = App_SCQuickChat()
 
-app.change_window_size()
-
-app.update()
+app.change_window_sizeStart() # set window size
+app.toggle_mode() # set window mode borderless at start 
+app.loadStart() # load config 
+app.update() 
 app.mainloop()
 

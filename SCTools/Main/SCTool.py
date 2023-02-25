@@ -24,8 +24,8 @@ class App_SCTool(tk.Tk):
         screen_height = self.winfo_screenheight()
 
         # Calculate x and y coordinates for the window
-        x = int(screen_width/2 - 375) # 375 is half of the window width
-        y = screen_height - 90 # 90 is the window height
+        x = int(screen_width/2 - 600) # 375 is half of the window width
+        y = screen_height - 30 # 90 is the window height
 
         # Set the window position
         self.geometry("1400x30+{}+{}".format(x, y))
@@ -120,7 +120,7 @@ class App_SCTool(tk.Tk):
         
         ###Slider 
         DefaultSliderValue = .7
-        self.slider = tk.Scale(WindowFrameSettings, from_=0.2, to=1, resolution=0.1, orient="horizontal", command=self.set_transparency,showvalue=False, bg="#1E1E1E", fg="#FFFFFF", troughcolor="#565656", highlightbackground="#1E1E1E", bd=0, length=100)
+        self.slider = tk.Scale(WindowFrameSettings, from_=0.2, to=1, resolution=0.1,width=10, orient="horizontal", command=self.set_transparency,showvalue=False, bg="#1E1E1E", fg="#FFFFFF", troughcolor="#565656", highlightbackground="#1E1E1E", bd=0, length=100)
         self.slider.set(DefaultSliderValue) # Set slider value to 1 by default
         self.slider.pack(side="right", fill="x", padx=1)
 
@@ -207,7 +207,7 @@ class App_SCTool(tk.Tk):
          # store current mouse position
          original_pos = pyautogui.position()
          # move mouse to mobiglass button position and click the left mouse button
-         pyautogui.moveTo(100, 100)
+         pyautogui.moveTo(20, 250)
          pyautogui.click(button='left')
          # add a delay of 0.1 second
          time.sleep(0.1)
@@ -225,7 +225,7 @@ class App_SCTool(tk.Tk):
             # store current mouse position
             original_pos = pyautogui.position()
             # move mouse to mobiglass button position and click the left mouse button
-            pyautogui.moveTo(100, 100)
+            pyautogui.moveTo(20,250)
             pyautogui.click(button='left')
             # add a delay of 0.1 second
             time.sleep(0.1)
@@ -243,7 +243,7 @@ class App_SCTool(tk.Tk):
             # store current mouse position
             original_pos = pyautogui.position()
             # move mouse to mobiglass button position and click the left mouse button
-            pyautogui.moveTo(100, 100)
+            pyautogui.moveTo(20, 250)
             pyautogui.click(button='left')
             # add a delay of 0.1 second
             time.sleep(0.1)
@@ -261,7 +261,7 @@ class App_SCTool(tk.Tk):
             # store current mouse position
             original_pos = pyautogui.position()
             # move mouse to comms button position and click the left mouse button
-            pyautogui.moveTo(200, 200)
+            pyautogui.moveTo(20, 250)
             pyautogui.click(button='left')
             # add a delay of 0.1 second
             time.sleep(0.1)
@@ -279,7 +279,7 @@ class App_SCTool(tk.Tk):
             # store current mouse position
             original_pos = pyautogui.position()
             # move mouse to mobiglass button position and click the left mouse button
-            pyautogui.moveTo(100, 100)
+            pyautogui.moveTo(20, 250)
             pyautogui.click(button='left')
             # add a delay of 0.1 second
             time.sleep(0.1)
@@ -297,7 +297,7 @@ class App_SCTool(tk.Tk):
             # store current mouse position
             original_pos = pyautogui.position()
             # move mouse outside of window and click the left mouse button
-            pyautogui.moveTo(500,50)
+            pyautogui.moveTo(20,250)
             pyautogui.click(button='left')
             # press ``
             keyboard.press_and_release('`')
@@ -323,7 +323,7 @@ class App_SCTool(tk.Tk):
           # store current mouse position
             original_pos = pyautogui.position()
             # move mouse outside of window and click the left mouse button
-            pyautogui.moveTo(500,50)
+            pyautogui.moveTo(20,250)
             pyautogui.click(button='left')
             # press ``
             keyboard.press_and_release('`')
@@ -357,10 +357,10 @@ class App_SCTool(tk.Tk):
         self.print_button_debug(name)
 
 
-    def CheckClickCount(self):  ## allows quit button to be activated after 5 presses
-        if self.click_count < 4:
+    def CheckClickCount(self):  ## allows quit button to be activated after 3 clicks
+        if self.click_count < 3:
             self.click_count += 1
-            self.quit_button.config(text="EXIT GAME ({})".format(5 - self.click_count))
+            self.quit_button.config(text="EXIT GAME ({})".format(3 - self.click_count))
         else:
             self.QuitGame()
             self.click_count = 0
