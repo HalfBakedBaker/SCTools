@@ -10,13 +10,21 @@
 #
 #############################################################################################
 import tkinter as tk
+import time 
+import keyboard 
+import pyautogui
 
 class Application:
+    ############################################## Main App ########################################### 
     def __init__(self):
         # Create 3 top-level windows
         self.root1 = tk.Tk()
         self.root2 = tk.Tk()
         self.root3 = tk.Tk()
+        
+        self.recording = False
+        self.recorded_position = None
+
 
         # Set window properties
         for root in [self.root1, self.root2, self.root3]:
@@ -34,8 +42,15 @@ class Application:
         # Functions for bulk buttons 
         self.functions = [self.Print1, self.Print2, self.Print3, self.Print4, self.Print5]
         self.create_buttons()
+        self.root = root
         
         # Add toggle buttons to window 1
+        self.toggle_button2 = tk.Button(self.root1, text="MacroBase", bg="#383838", fg="white", command=self.MacroBase)
+        self.toggle_button2.pack(side="left", padx=5, pady=5)
+        self.toggle_button2 = tk.Button(self.root1, text="PlayMouse", bg="#383838", fg="white", command=self.play_position)
+        self.toggle_button2.pack(side="left", padx=5, pady=5)
+        self.toggle_button2 = tk.Button(self.root1, text="RecordMousePos", bg="#383838", fg="white", command=self.record_position)
+        self.toggle_button2.pack(side="left", padx=5, pady=5)
         self.toggle_button2 = tk.Button(self.root1, text="Show/Hide Window 2", bg="#383838", fg="white", command=self.toggle_visibility2)
         self.toggle_button2.pack(side="left", padx=5, pady=5)
         self.toggle_button3 = tk.Button(self.root1, text="Show/Hide Window 3", bg="#383838", fg="white", command=self.toggle_visibility3)
@@ -49,7 +64,7 @@ class Application:
         self.is_borderless = False
 
         self.root1.mainloop()
-    
+   ################################################## Global Buttons ###################################
     def create_buttons(self): # bulk button maker
         ButtonCount = 5   # Define how many buttons to add to each root Makes x amount of buttons for each window Functions are assigned above 
         for i in range(ButtonCount):
@@ -61,10 +76,8 @@ class Application:
             button.pack(side="left", padx=5, pady=5)
             # root 3
             button = tk.Button(self.root3, text="Button {}".format(i+1), bg="#383838", fg="white", activebackground=self.button_colors[i], command=self.functions[i])
-            button.pack(side="left", padx=5, pady=5)
-        
-        
-        
+            button.pack(side="left", padx=5, pady=5)    
+############################################## Functions Main App ###########################################  
     def toggle_mode(self):
         # Check current mode of windows
         current_mode = self.root1.overrideredirect()
@@ -88,6 +101,50 @@ class Application:
         except tk.TclError:
             pass
 
+    def record_position(self):
+        self.recording = True
+        t = 3
+        for i in range(t, 0, -1):
+            print(i)
+            time.sleep(1)
+        self.recorded_position = self.root.winfo_pointerxy()
+        print("Recorded position:", self.recorded_position)
+        self.recording = False
+
+    def play_position(self):
+        if self.recorded_position is not None:
+            x, y = self.recorded_position
+            original_pos = pyautogui.position()
+            pyautogui.moveTo(x,y)
+            pyautogui.click(button='left')
+            # add a delay of 0.1 second
+            time.sleep(0.1)
+            # move mouse back to original position
+            pyautogui.moveTo(original_pos)
+        else:
+            print("No recorded position found")
+            
+    def MacroBase(self):
+        if self.recorded_position is not None:
+            x, y = self.recorded_position
+            original_pos = pyautogui.position()
+            name = 'hello' # thing that is typed out after mouse has focused on chosen location 
+            PR1 = 'enter' # key that is pressed then released before the typrewrite 
+            PR2 = 'emter' #key that is pressed then released after the typrwrite 
+            # location mouse returns to after completing the action 
+            pyautogui.moveTo(x,y)
+            # left click to focus on window 
+            pyautogui.click(button='left')
+            # Press Release Button 1 
+            keyboard.press_and_release(PR1)
+            # typewite something 
+            pyautogui.typewrite(name)
+            # Press Release Button 1 
+            keyboard.press_and_release(PR2)
+            # move mouse back to original position
+            pyautogui.moveTo(original_pos)
+        else:
+            print("No recorded position found")
 
     def toggle_visibility2(self):
         if self.root2.winfo_viewable():
@@ -100,7 +157,8 @@ class Application:
             self.root3.withdraw()
         else:
             self.root3.deiconify()
-    
+   #######################################################################################################
+   ################################# Global Functions all windows can call################################
     def Print1(self):
         print("Button 1 was clicked.")
     
@@ -115,7 +173,7 @@ class Application:
     
     def Print5(self):
         print("Button 5 was clicked.")
-
+###########################################################################################################
 
 app=Application()
 
@@ -389,50 +447,50 @@ app=Application()
 
 # # ###################################################################################################################################################################################################################
 
-# # ####################import tkinter as tk
-# # import time
-# # import tkinter as tk
-# # import pyautogui
+# ####################import tkinter as tk
+# import time
+# import tkinter as tk
+# import pyautogui
 
-# # class MouseRecorder:
-# #     def __init__(self, root):
-# #         self.root = root
-# #         self.root.title("Mouse Recorder")
-# #         self.root.geometry("500x500")
-# #         self.root.attributes("-topmost", True)
-# #         self.recording = False
-# #         self.recorded_position = None
+# class MouseRecorder:
+#     def __init__(self, root):
+#         self.root = root
+#         self.root.title("Mouse Recorder")
+#         self.root.geometry("500x500")
+#         self.root.attributes("-topmost", True)
+#         self.recording = False
+#         self.recorded_position = None
 
-# #         record_button = tk.Button(self.root, text="Record", command=self.record_position)
-# #         record_button.pack(side=tk.LEFT, padx=10)
+#         record_button = tk.Button(self.root, text="Record", command=self.record_position)
+#         record_button.pack(side=tk.LEFT, padx=10)
 
-# #         play_button = tk.Button(self.root, text="Play", command=self.play_position)
-# #         play_button.pack(side=tk.LEFT)
+#         play_button = tk.Button(self.root, text="Play", command=self.play_position)
+#         play_button.pack(side=tk.LEFT)
 
-# # ###################################################################################################################################################################################################################
-# #     def record_position(self):
-# #         self.recording = True
-# #         for i in range(5, 0, -1):
-# #             print(i)
-# #             time.sleep(1)
-# #         self.recorded_position = self.root.winfo_pointerxy()
-# #         print("Recorded position:", self.recorded_position)
-# #         self.recording = False
+# ###################################################################################################################################################################################################################
+#     def record_position(self):
+#         self.recording = True
+#         for i in range(5, 0, -1):
+#             print(i)
+#             time.sleep(1)
+#         self.recorded_position = self.root.winfo_pointerxy()
+#         print("Recorded position:", self.recorded_position)
+#         self.recording = False
 
-# #     def play_position(self):
-# #         if self.recorded_position is not None:
-# #             x, y = self.recorded_position
-# #             pyautogui.moveTo(x,y)
-# #             pyautogui.click(button='left')
-# #         else:
-# #             print("No recorded position found")
+#     def play_position(self):
+#         if self.recorded_position is not None:
+#             x, y = self.recorded_position
+#             pyautogui.moveTo(x,y)
+#             pyautogui.click(button='left')
+#         else:
+#             print("No recorded position found")
 
 
 
-# # #######################################################################################################################################################################################################################################
-# # root = tk.Tk()
-# # mouse_recorder = MouseRecorder(root)
-# # root.mainloop()
+# #######################################################################################################################################################################################################################################
+# root = tk.Tk()
+# mouse_recorder = MouseRecorder(root)
+# root.mainloop()
 
 # # ############################################# Record mouse location, Use to set location x for mouse to move to for the print commands inside the main apps ## move location x and click then type y ####################################################################################################################################################################
 # # #######################################################################################################################################################################################################################################
