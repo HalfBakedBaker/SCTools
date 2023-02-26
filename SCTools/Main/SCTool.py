@@ -105,14 +105,14 @@ class App_SCTool(tk.Tk):
         # Create and pack the toggle window mode button
         self.is_borderless = False
         self.toggle_mode_button = tk.Button(WindowFrameSettings, text="Window Mode", command=self.toggle_mode, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        self.toggle_mode_button.pack(side="right", fill="x", padx=1, pady=1)
+        self.toggle_mode_button.pack(side="right", fill="x", padx=4, pady=2)
         
         
  
         # Create and pack the toggle Hide Button
         self.is_borderless = False
         self.toggle_mode_button = tk.Button(WindowFrameSettings, text="Hide - '<+m'", command=self.handle_keybind_press, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        self.toggle_mode_button.pack(side="right", fill="x", padx=1, pady=1)
+        self.toggle_mode_button.pack(side="right", fill="x", padx=4, pady=2)
         
         
  
@@ -371,8 +371,8 @@ class App_SCTool(tk.Tk):
     def template(self):
             self.template_printbuttonfunction(name="Template = mouse move To (500,50) ,click, 'enter', type>Template, 'enter', returnmouse")
       
-    def update(self):
-        self.after(10, self.update)
+    # def update(self):  # Not needed 
+    #     self.after(10, self.update)
    
 app = App_SCTool()
 
@@ -389,3 +389,39 @@ app.mainloop()
    
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#############################################################################################
+#############################################################################################

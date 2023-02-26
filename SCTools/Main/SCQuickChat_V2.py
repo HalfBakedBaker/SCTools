@@ -20,8 +20,7 @@ class App_SCQuickChat(tk.Tk):
         self.geometry("600x550")
         self.configure(bg="#1E1E1E")
 
-        
-
+      
         # Get screen width and height
         screen_width = self.winfo_screenwidth()
         screen_height = self.winfo_screenheight()
@@ -49,16 +48,17 @@ class App_SCQuickChat(tk.Tk):
         self.bind("<B3-Motion>", self.on_move)
 
         # self.after_id = None
-##################################################################
+##################################################################  
   
+
 # create a frame to hold the buttons for quit and debug 
-        sliderwidth =  350
+        sliderwidth =  320
         DefaultSliderValue = .7
         button_frame_debug_quit = tk.Frame(self, bg="#1E1E1E")
         button_frame_debug_quit.pack(side=tk.TOP, fill=tk.X)
-        self.slider = tk.Scale(button_frame_debug_quit, from_=0.2, to=1,width=10, resolution=0.1, orient="horizontal", command=self.set_transparency, showvalue=False, bg="#1E1E1E", fg="#FFFFFF", troughcolor="#565656", highlightbackground="#1E1E1E", bd=0, length=sliderwidth)
-        self.slider.set(DefaultSliderValue) # Set slider value to 1 by default
-        self.slider.pack(side="right",  padx=10, pady=1)
+        self.Opacityslider = tk.Scale(button_frame_debug_quit, from_=0.2, to=1,width=10, resolution=0.1, orient="horizontal", command=self.set_transparency, showvalue=False, bg="#1E1E1E", fg="#FFFFFF", troughcolor="#565656", highlightbackground="#1E1E1E", bd=0, length=sliderwidth)
+        self.Opacityslider.set(DefaultSliderValue) # Set slider value to 1 by default
+        self.Opacityslider.pack(side="right",  padx=10, pady=1)
 
 
 
@@ -71,8 +71,8 @@ class App_SCQuickChat(tk.Tk):
 
         # Create CloseApp button
 
-        self.load_button = tk.Button(windowSettingsToggleButton, text="QuitApp", command=self.CloseApp, bg="#590000", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        self.load_button.pack(side="right", fill="x", padx=10, pady=2)
+        self.close_button = tk.Button(windowSettingsToggleButton, text="QuitApp", command=self.CloseApp, bg="#590000", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+        self.close_button.pack(side="right", fill="x", padx=10, pady=2)
      
 
 
@@ -84,24 +84,24 @@ class App_SCQuickChat(tk.Tk):
         
   
         ### Hide 
-        button = tk.Button(windowSettingsToggleButton, text="Hide(<+m)", command=self.handle_keybind_press, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        button.pack(side="right", fill="x", padx=4, pady=1)
+        Collapsebutton = tk.Button(windowSettingsToggleButton, text="^v", command=self.CollapseMenu, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+        Collapsebutton.pack(side="right", fill="x", padx=4, pady=1)
         #### pack the window settings button frame m,
         windowSettingsToggleButton.pack(side="top", fill="x", pady=2)
         
         
-        # Create and pack the size toggle button/ side bar
+        # Create and pack the size toggle button/side bar
         self.size_toggle = 0
-        button = tk.Button(windowSettingsToggleButton, text="Sidebar", command=self.change_window_size, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        button.pack(side="right", fill="x", padx=4, pady=2)
-
+        self.Sidebarbutton = tk.Button(windowSettingsToggleButton, text="Sidebar", command=self.change_window_size, width=(10),bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+        self.Sidebarbutton.pack(side="right", fill="x", padx=4, pady=2)
+        
         #### pack the window settings button frame 
         windowSettingsToggleButton.pack(side="top", fill="x", pady=2)
 
-        
 
-
-#########################################################################################################
+########################################################################################################
+########################################################################################
+################################### "Enter Text" ######################################################################
 
 
        # Create and pack the canvas that displays new buttons 
@@ -120,28 +120,32 @@ class App_SCQuickChat(tk.Tk):
         add_button = tk.Button(self, text="Add", command=self.add_button, bg="#014214", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
         add_button.pack(side="top", fill="x", padx=10, pady=10)
 
+   
+        # Create and pack the Delete Selected button
+        delete_button = tk.Button(self, text="Delete Selected", command=self.delete_selected_button, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+        delete_button.pack(side="top", fill="x", padx=10, pady=10)
+       
+        # Create save button
+        save_button = tk.Button(self, text="Save", command=self.save, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+        save_button.pack(side="top", fill="x", padx=10, pady=10)
+        
+        # Create load button
+        load_button = tk.Button(self, text="Load", command=self.load, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+        load_button.pack(side="top", fill="x", padx=10, pady=10)
+
         # Create and pack the Delete All button
         deleteall_button = tk.Button(self, text="Delete All", command=self.deleteall_buttons, bg="#520000", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
         deleteall_button.pack(side="top", fill="x", padx=10, pady=10)
 
-        # Create and pack the Delete Selected button
-        delete_button = tk.Button(self, text="Delete Selected", command=self.delete_selected_button, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        delete_button.pack(side="top", fill="x", padx=10, pady=10)
-
-        # Create save button
-        save_button = tk.Button(self, text="Save", command=self.save, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        save_button.pack(side="top", fill="x", padx=10, pady=10)
 
         # Create saveDefault button
         save_button_Default = tk.Button(self, text="Save Default", command=self.saveDefault, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
         save_button_Default.pack(side="top", fill="x", padx=10, pady=10)
+        
         # Create loadDefault button
         load_button_Default = tk.Button(self, text="Load  Default", command=self.loadDefault, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
         load_button_Default.pack(side="top", fill="x", padx=10, pady=10)
 
-        # Create load button
-        load_button = tk.Button(self, text="Load", command=self.load, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        load_button.pack(side="top", fill="x", padx=10, pady=10)
 
 
         # Create and pack the listbox for the buttons
@@ -197,16 +201,20 @@ class App_SCQuickChat(tk.Tk):
             self.after(0, lambda: pyautogui.moveTo(self.winfo_rootx() + self.winfo_width() / 2, self.winfo_rooty() + self.winfo_height() / 2))
           
     def change_window_size(self):
-        # toggle between two different window sizes and move the window left or right
-        MoveAmount = (150)
+        # Toggle between two different window sizes and move the window left or right
+        MoveAmount = 150
         if self.size_toggle == 0:
             self.geometry("350x550")
             self.geometry("+{}+{}".format(self.winfo_x() + MoveAmount, self.winfo_y()))
             self.size_toggle = 1
+            self.Sidebarbutton.configure(bg="#565656")
+            # self.configure(bg="blue")
         else:
             self.geometry("500x550")
             self.geometry("+{}+{}".format(self.winfo_x() - MoveAmount, self.winfo_y()))
             self.size_toggle = 0
+            self.Sidebarbutton.configure(bg="#0d3a63")
+            # self.configure(bg="#1E1E1E")
             
     def change_window_sizeStart(self):
         # toggle between two different window sizes and move the window left or right
@@ -219,11 +227,37 @@ class App_SCQuickChat(tk.Tk):
            
             self.size_toggle = 0
 
+    def CollapseMenu(self):
+        
+                # toggle between two different window sizes and move the window left or right
+        if self.size_toggle == 0:
+            self.geometry("350x550")
+         # Show buttons 
+            self.ToggleButtonVis(True)
+
+            self.size_toggle = 1
+        else:
+            self.geometry("350x50")
+        # HideButtons   
+            self.ToggleButtonVis(False)
+
+            self.size_toggle = 0
+
+    def ToggleButtonVis(self, show):
+        if show:
+            self.toggle_mode_button.pack(side="right", fill="x", padx=4, pady=2)
+            self.Sidebarbutton.pack(side="right", fill="x", padx=4, pady=2)
+            self.Opacityslider.pack(side="top",padx=10,pady=1)
+        else:
+            self.toggle_mode_button.pack_forget()
+            self.Sidebarbutton.pack_forget()
+            self.Opacityslider.pack_forget()
+
 
     def set_transparency(self, value): # Set transparanecy value from slider
         self.attributes('-alpha', float(value))
 
-    def toggle_mode(self):# toggle Window mode button 
+    def toggle_mode(self):# toggle borderless mode button 
         self.is_borderless = not self.is_borderless
         if self.is_borderless:
             self.overrideredirect(True)
@@ -429,8 +463,8 @@ class App_SCQuickChat(tk.Tk):
           print("Close SCQuickChat")
           self.destroy()
    
-    def update(self):
-        self.after(10, self.update)
+    # def update(self):   ### IDK what this was but it was wrecking performance and not needed 
+    #     self.after(10, self.update)
   
 
 

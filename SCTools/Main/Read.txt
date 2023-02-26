@@ -1,0 +1,16 @@
+Made using python 3.10.6 
+
+Ensure you have python installed "https://www.python.org/downloads/release/python-3106/" 
+
+Bottom of page "windows installer" 
+
+Only Compatible with windows as i am awful at programming and am still learning.  
+
+Run SCToolHUB_V2.exe 
+OR 
+Run SCToolHUB_V2.py ( seems to perform better when running the .py 
+
+"M + < " = Hotkey to Hide / Show Tools 
+
+Ensure Star Citizen is running in "Borderless" mode otherwise it doesnt work. 
+

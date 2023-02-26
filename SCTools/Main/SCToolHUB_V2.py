@@ -11,7 +11,7 @@ from tkinter import *
 import keyboard
 import pyautogui
 
-
+import time 
 import psutil
 
 
@@ -138,7 +138,7 @@ class App_HUB(tk.Tk):
         self.text_input.insert(0, "Search Google")
         self.text_input.pack(side="left", padx=1, pady=1)
         
-        # Create the Search Google Button
+        # Create the Search Google Button,m,m
         self.button8 = tk.Button(web_buttons, text="Search", command=lambda:openwebpage_process(Url="https://www.google.com/search?q=" + self.text_input.get()), bg="#007E9E", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
         self.button8.pack(side="left", padx=4, pady=1)
         
@@ -262,6 +262,7 @@ class App_HUB(tk.Tk):
         # self.close_sctool()
         self.close_all_subprocesses()
         # self.appQC.terminate()
+        time.sleep(0.1)
         # self.appSCT.terminate()
         super().destroy()
     

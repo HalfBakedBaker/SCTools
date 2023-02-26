@@ -1,3 +1,143 @@
+
+
+
+
+
+#############################################################################################
+#
+#                           Much Better Example for a "HUB" Template 
+#
+#
+#############################################################################################
+import tkinter as tk
+
+class Application:
+    def __init__(self):
+        # Create 3 top-level windows
+        self.root1 = tk.Tk()
+        self.root2 = tk.Tk()
+        self.root3 = tk.Tk()
+
+        # Set window properties
+        for root in [self.root1, self.root2, self.root3]:
+            root.overrideredirect(False)  ## Window / borderless mode 
+            root.geometry("+0+0")
+            root.wm_attributes("-topmost", 1)
+            root.config(bg="#282828")
+            root.attributes("-alpha", 0.7)
+
+        self.root1.title("Hub")
+        self.root2.title("App2")
+        self.root3.title("App2")
+        # Create buttons for each window
+        self.button_colors = ["blue", "green", "yellow", "orange", "red"]
+        # Functions for bulk buttons 
+        self.functions = [self.Print1, self.Print2, self.Print3, self.Print4, self.Print5]
+        self.create_buttons()
+        
+        # Add toggle buttons to window 1
+        self.toggle_button2 = tk.Button(self.root1, text="Show/Hide Window 2", bg="#383838", fg="white", command=self.toggle_visibility2)
+        self.toggle_button2.pack(side="left", padx=5, pady=5)
+        self.toggle_button3 = tk.Button(self.root1, text="Show/Hide Window 3", bg="#383838", fg="white", command=self.toggle_visibility3)
+        self.toggle_button3.pack(side="left", padx=5, pady=5)
+        self.toggle_window = tk.Button(self.root1, text="Window/Borderless", bg="#383838", fg="white", command=self.toggle_mode)
+        self.toggle_window.pack(side="left", padx=5, pady=5)
+        self.toggle_window = tk.Button(self.root1, text="Quit", bg="red", fg="white", command=self.QuitApp)
+        self.toggle_window.pack(side="left", padx=5, pady=5)
+
+        # Start mainloop
+        self.is_borderless = False
+
+        self.root1.mainloop()
+    
+    def create_buttons(self): # bulk button maker
+        ButtonCount = 5   # Define how many buttons to add to each root Makes x amount of buttons for each window Functions are assigned above 
+        for i in range(ButtonCount):
+            # root 1 buttons 
+            button = tk.Button(self.root1, text="Button {}".format(i+1), bg="#383838", fg="white", activebackground=self.button_colors[i], command=self.functions[i])
+            button.pack(side="left", padx=5, pady=5)
+            # root 2
+            button = tk.Button(self.root2, text="Button {}".format(i+1), bg="#383838", fg="white", activebackground=self.button_colors[i], command=self.functions[i])
+            button.pack(side="left", padx=5, pady=5)
+            # root 3
+            button = tk.Button(self.root3, text="Button {}".format(i+1), bg="#383838", fg="white", activebackground=self.button_colors[i], command=self.functions[i])
+            button.pack(side="left", padx=5, pady=5)
+        
+        
+        
+    def toggle_mode(self):
+        # Check current mode of windows
+        current_mode = self.root1.overrideredirect()
+
+        # Toggle mode for all windows
+        self.root1.overrideredirect(not current_mode)
+        self.root2.overrideredirect(not current_mode)
+        self.root3.overrideredirect(not current_mode)
+
+    def QuitApp(self):
+        try:
+            self.root1.destroy()
+        except tk.TclError:
+            pass
+        try:
+            self.root2.destroy()
+        except tk.TclError:
+            pass
+        try:
+            self.root3.destroy()
+        except tk.TclError:
+            pass
+
+
+    def toggle_visibility2(self):
+        if self.root2.winfo_viewable():
+            self.root2.withdraw()
+        else:
+            self.root2.deiconify()
+    
+    def toggle_visibility3(self):
+        if self.root3.winfo_viewable():
+            self.root3.withdraw()
+        else:
+            self.root3.deiconify()
+    
+    def Print1(self):
+        print("Button 1 was clicked.")
+    
+    def Print2(self):
+        print("Button 2 was clicked.")
+    
+    def Print3(self):
+        print("Button 3 was clicked.")
+    
+    def Print4(self):
+        print("Button 4 was clicked.")
+    
+    def Print5(self):
+        print("Button 5 was clicked.")
+
+
+app=Application()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # # # # ###########SC Tool  - HalfbakedBaker & ChatGPT
 # # # # ###################################################
 # # # # ## 
