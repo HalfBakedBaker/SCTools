@@ -31,7 +31,7 @@ class App_HUB(tk.Tk):
         self.is_borderless = False
         self.attributes('-topmost', 1) # Force window above all others
         self.attributes('-alpha', 1) # Set default transparency to 1
-        self.geometry("1150x25")
+        self.geometry("1200x25")
         self.create_widgets()
          # Bind right mouse button to drag the window
         self.bind("<ButtonPress-3>", self.start_move)
@@ -53,7 +53,7 @@ class App_HUB(tk.Tk):
         y = 0 # Place the window at the top of the screen
         
         # Set the window position
-        self.geometry("1150x25+{}+{}".format(x, y))
+        self.geometry("1225x25+{}+{}".format(x, y))
 
     def handle_keybind_press(self): ## Toggle Window Visibility / Show Hide
         self.keybind_press = not self.keybind_press
@@ -94,19 +94,6 @@ class App_HUB(tk.Tk):
         # Create and pack the open SCTool button
         self.button1 = tk.Button(web_buttons, text="SCTool", command=lambda: self.openSCTool(), bg="#007E9E", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
         self.button1.pack(side="left", padx=4, pady=1)
-#############################
-###############################################  Redacted to improve performance. Will Show all menus at start and then toggle visibility instead of making new instances 
-    #     # Create and pack the QuitQuick Chat Tool button
-    #     self.button0 = tk.Button(web_buttons, text="CloseChatTool", command=lambda: closequickchat(), bg="#590000", fg="#FFFFFF",activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-      
-    #     self.button0.pack(side="left", padx=4, pady=1)
-    #     # Create and pack the Quit SCTool button
-    #     self.button1 = tk.Button(web_buttons, text="CloseSCTool", command=lambda: closeSCTool(), bg="#590000", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-    #     self.button1.pack(side="left", padx=4, pady=1)
-    # #############################
-
-
-
 
 ################################################################################################################################################
 
@@ -129,31 +116,18 @@ class App_HUB(tk.Tk):
         # Create and pack the other website buttons 
         self.button6 = tk.Button(web_buttons, text="EUXTrade", command=lambda:openwebpage_process(Url="https://uexcorp.space"), bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
         self.button6.pack(side="left", padx=4, pady=1)
-        # # Create and pack the other website buttons 
-        # self.button7 = tk.Button(web_buttons, text="IssueCouncil", command=lambda:openwebpage_process(Url="https://www.Google.com"), bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        # self.button7.pack(side="left", padx=10, pady=10)
+        # Create and pack the other website buttons 
+        self.button7 = tk.Button(web_buttons, text="YouTube", command=lambda:openwebpage_process(Url="https://www.youtube.com"), bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+        self.button7.pack(side="left", padx=4, pady=1)
 
         # Create the text input and pack it
         self.text_input = tk.Entry(web_buttons, bg="#1E1E1E", fg="#FFFFFF", highlightthickness=0, bd=0, font=("Arial", 10, "bold"))
         self.text_input.insert(0, "Search Google")
         self.text_input.pack(side="left", padx=1, pady=1)
-        
-        # Create the Search Google Button,m,m
-        self.button8 = tk.Button(web_buttons, text="Search", command=lambda:openwebpage_process(Url="https://www.google.com/search?q=" + self.text_input.get()), bg="#007E9E", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+
+        # Create and pack the search button
+        self.button8 = tk.Button(web_buttons, text="Search", command=lambda: openwebpage_process(Url="https://www.google.com/search?q=" + self.text_input.get()), bg="#007E9E", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
         self.button8.pack(side="left", padx=4, pady=1)
-        
-        
-
-#### Example buttons 
-
-        # # Create and pack the other website buttons 
-        # self.button9 = tk.Button(web_buttons, text="Example", command=lambda:openwebpage_process(Url="https://www.example.com"), bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        # self.button9.pack(side="left", padx=10, pady=10)
-        # # Create and pack the other website buttons 
-        # self.button10 = tk.Button(web_buttons, text="Example", command=lambda:openwebpage_process(Url="https://www.example.com"), bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        # self.button10.pack(side="left", padx=10, pady=10)
-
-
 
         # Create a frame for the window settings
         window_settings = tk.LabelFrame(self, text="Window Settings")
@@ -169,8 +143,6 @@ class App_HUB(tk.Tk):
         # Button to toggle window mode
         self.mode_button = tk.Button(web_buttons, text="Borderless", command=self.toggle_mode, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
         self.mode_button.pack(side="left", fill="x", padx=4, pady=1)
-
-
 
         # Button to Quit SCTools
         self.QuitSCT = tk.Button(web_buttons, text="QuitSCT", command=self.destroy, bg="#590000", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
@@ -283,3 +255,4 @@ if __name__ == "__main__":
     App_HUB.OpenToolStart()
     App_HUB.mainloop()  
 
+m,m,mm,m

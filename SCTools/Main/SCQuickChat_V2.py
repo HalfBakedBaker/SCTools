@@ -105,53 +105,104 @@ class App_SCQuickChat(tk.Tk):
 
 
        # Create and pack the canvas that displays new buttons 
-        self.canvas = tk.Canvas(self, width=300, height=300, bg="gray")
+        self.canvas = tk.Canvas(self, width=600, height=300, bg="gray")
         self.canvas.pack(side="right", fill="both", expand=True)
 
+    #     # Create and pack the "Enter Text" label
+    #     label = tk.Label(self, text="Enter Text", bg="#1E1E1E", fg="#FFFFFF", font=("Arial", 10, "bold"))
+    #     label.pack(side="top", padx=5, pady=5)
+
+    #     # Create and pack the button name entry
+    #     self.button_name_entry = tk.Entry(self, bg="#565656", fg="#FFFFFF", highlightbackground="#1E1E1E", bd=0, font=("Arial", 10))
+    #     self.button_name_entry.pack(side="top", fill="x", padx=10, pady=10)
+
+    #     ### # Create and pack the Add button
+    #     add_button = tk.Button(self, text="Add", command=self.add_button, bg="#014214", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+    #     add_button.pack(side="top", fill="x", padx=10, pady=10)
+
+   
+    #     # Create and pack the Delete Selected button
+    #     delete_button = tk.Button(self, text="Delete Selected", command=self.delete_selected_button, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+    #     delete_button.pack(side="top", fill="x", padx=10, pady=10)
+       
+    #     # Create save button
+    #     save_button = tk.Button(self, text="Save", command=self.save, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+    #     save_button.pack(side="top", fill="x", padx=10, pady=10)
+        
+    #     # Create load button
+    #     load_button = tk.Button(self, text="Load", command=self.load, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+    #     load_button.pack(side="top", fill="x", padx=10, pady=10)
+
+    #     # Create and pack the Delete All button
+    #     deleteall_button = tk.Button(self, text="Delete All", command=self.deleteall_buttons, bg="#520000", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+    #     deleteall_button.pack(side="top", fill="x", padx=10, pady=10)
+
+
+    #     # Create saveDefault button
+    #     save_button_Default = tk.Button(self, text="Save Default", command=self.saveDefault, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+    #     save_button_Default.pack(side="top", fill="x", padx=10, pady=10)
+        
+    #     # Create loadDefault button
+    #     load_button_Default = tk.Button(self, text="Load  Default", command=self.loadDefault, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+    #     load_button_Default.pack(side="top", fill="x", padx=10, pady=10)
+
+
+
+    #     # Create and pack the listbox for the buttons
+    #     self.button_listbox = tk.Listbox(self, bg="#565656", fg="#FFFFFF", highlightbackground="#1E1E1E", bd=0, font=("Arial", 10, "bold"))
+    #     self.button_listbox.pack(side="left", fill="both", expand=True)
+###############################################################################################
+        
+
+        # Create a frame for the buttons on the left-hand side
+        button_frame = tk.Frame(self, bg="#1E1E1E")
+        button_frame.pack(side="left", fill="y")
+
         # Create and pack the "Enter Text" label
-        label = tk.Label(self, text="Enter Text", bg="#1E1E1E", fg="#FFFFFF", font=("Arial", 10, "bold"))
+        label = tk.Label(button_frame, text="Enter Text", bg="#1E1E1E", fg="#FFFFFF", font=("Arial", 10, "bold"))
         label.pack(side="top", padx=5, pady=5)
 
         # Create and pack the button name entry
-        self.button_name_entry = tk.Entry(self, bg="#565656", fg="#FFFFFF", highlightbackground="#1E1E1E", bd=0, font=("Arial", 10))
+        self.button_name_entry = tk.Entry(button_frame, bg="#565656", fg="#FFFFFF", highlightbackground="#1E1E1E", bd=0, font=("Arial", 10))
         self.button_name_entry.pack(side="top", fill="x", padx=10, pady=10)
 
         ### # Create and pack the Add button
-        add_button = tk.Button(self, text="Add", command=self.add_button, bg="#014214", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+        add_button = tk.Button(button_frame, text="Add", command=self.add_button, bg="#014214", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
         add_button.pack(side="top", fill="x", padx=10, pady=10)
 
-   
         # Create and pack the Delete Selected button
-        delete_button = tk.Button(self, text="Delete Selected", command=self.delete_selected_button, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+        delete_button = tk.Button(button_frame, text="Delete Selected", command=self.delete_selected_button, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
         delete_button.pack(side="top", fill="x", padx=10, pady=10)
-       
+
         # Create save button
-        save_button = tk.Button(self, text="Save", command=self.save, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+        save_button = tk.Button(button_frame, text="Save", command=self.save, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
         save_button.pack(side="top", fill="x", padx=10, pady=10)
-        
+
         # Create load button
-        load_button = tk.Button(self, text="Load", command=self.load, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+        load_button = tk.Button(button_frame, text="Load", command=self.load, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
         load_button.pack(side="top", fill="x", padx=10, pady=10)
 
         # Create and pack the Delete All button
-        deleteall_button = tk.Button(self, text="Delete All", command=self.deleteall_buttons, bg="#520000", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+        deleteall_button = tk.Button(button_frame, text="Delete All", command=self.deleteall_buttons, bg="#520000", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
         deleteall_button.pack(side="top", fill="x", padx=10, pady=10)
 
-
         # Create saveDefault button
-        save_button_Default = tk.Button(self, text="Save Default", command=self.saveDefault, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+        save_button_Default = tk.Button(button_frame, text="Save Default", command=self.saveDefault, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
         save_button_Default.pack(side="top", fill="x", padx=10, pady=10)
-        
+
+
         # Create loadDefault button
-        load_button_Default = tk.Button(self, text="Load  Default", command=self.loadDefault, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+        load_button_Default = tk.Button(button_frame, text="Load  Default", command=self.loadDefault, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
         load_button_Default.pack(side="top", fill="x", padx=10, pady=10)
 
 
 
         # Create and pack the listbox for the buttons
-        self.button_listbox = tk.Listbox(self, bg="#565656", fg="#FFFFFF", highlightbackground="#1E1E1E", bd=0, font=("Arial", 10, "bold"))
+        self.button_listbox = tk.Listbox(button_frame, bg="#565656", fg="#FFFFFF", highlightbackground="#1E1E1E", bd=0, font=("Arial", 10, "bold"))
         self.button_listbox.pack(side="left", fill="both", expand=True)
-        
+
+
+###############################################################################################
         #### Define Varibles
     
         ## updates buttons added to grid
@@ -270,9 +321,9 @@ class App_SCQuickChat(tk.Tk):
     #################################################################################
     def add_button(self, button_name=None, max_columns=4):
         maxentry = 40 ## define max amount of buttons
-        buttonwrapleng = 80
-        buttonwidth = 8
-        buttonheight = 4
+        buttonwrapleng = 80 # lentgh of wrapping text 
+        buttonwidth = 8 
+        buttonheight = 8
         ypad = 4
         xpad = 4
         
@@ -463,11 +514,11 @@ class App_SCQuickChat(tk.Tk):
           print("Close SCQuickChat")
           self.destroy()
    
-    # def update(self):   ### IDK what this was but it was wrecking performance and not needed 
-    #     self.after(10, self.update)
+   ### # def update(self):   ### IDK what this was but it was wrecking performance and not needed 
+   ### #     self.after(10, self.update)
   
 
-
+#####################################
 
 app = App_SCQuickChat()
 
@@ -477,3 +528,4 @@ app.loadStart() # load config
 app.update() 
 app.mainloop()
 
+m,
