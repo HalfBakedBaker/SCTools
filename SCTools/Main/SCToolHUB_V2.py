@@ -240,16 +240,16 @@ class App_HUB(tk.Tk):
         # self.close_quickchat()
         # self.close_sctool()
         self.close_all_subprocesses()
-        # self.appQC.terminate()
+        self.appQC.terminate()
         time.sleep(0.1)
-        # self.appSCT.terminate()
+        self.appSCT.terminate()
         super().destroy()
     
 
 
-print("SCToolHub 0.0.2")
+print("SCToolHub 0.0.3")
 
-print("24 Feb 2023")
+print("5 March 2023")
 print("init...")
 
 if __name__ == "__main__":
