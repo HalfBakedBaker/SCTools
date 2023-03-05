@@ -6,7 +6,7 @@
 This is a quick 'half-baked' implementation of some tools for Star Citizen in Windows. 
 
 
-After crashing my ship plenty of times due to typing in chat. I decided i wanted a feature similar to what we have in Forza with their "Link" feature. But with 
+After crashing my ship plenty of times due to typing in chat. I decided i wanted a feature similar to what we have in Forza with the "Link" feature. But with 
 the added ability to customise the words you would like to say. 
 
 This way i can click a single button and not have to worry about accidently turning my engines off, hitting cruise control ect...  
