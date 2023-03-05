@@ -26,8 +26,8 @@ save / load buttons to a text file in a location of your choice.
    the user can open mutiple instances of Quick Chat to have as many buttons as they like.
    
 Load / save Default 
-  Will look for text file named "Default" in folder named "Saved" and then load that at start. 
-  If you wish to change the default save, there is a button in the sidebar that allows you to overwrite the default save with whatever buttons are currently displayed.
+  Will look for text file named "Default" in folder named "Saved" then load that at start. 
+  If you wish to change the default save, there is a button in the sidebar that allows you to overwrite the default save with whatever buttons are currently displayed. It will then automatically load those buttons next time. 
 
 SCTool = Opens a menu with pre made buttons for the following:
 
