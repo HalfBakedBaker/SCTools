@@ -28,7 +28,7 @@ class App_SCTool(tk.Tk):
         y = screen_height - 30 # 90 is the window height
 
         # Set the window position
-        self.geometry("1400x30+{}+{}".format(x, y))
+        self.geometry("1075x30+{}+{}".format(x, y))
 
         self.configure(bg="#1E1E1E")
 
@@ -46,44 +46,15 @@ class App_SCTool(tk.Tk):
         self.after_id = None
 
 # ####################################################################################################
-# ####    Create frame for window setting toggle buttons 
-#         WindowFrameSettings = tk.Frame(self, bg="#1E1E1E")
-
-#  #### pack the window settings button frame 
-#         WindowFrameSettings.pack(side="top", fill="x", pady=5)
 
   # create a frame to hold the template buttons 
         WindowFrameSettings = tk.Frame(self, bg="#1E1E1E")
         WindowFrameSettings.pack(side=tk.TOP, fill=tk.X)
 
 
-
-
   # create a frame to hold the buttons for F1 F2 (Mobiglass and camera )
         WindowFrameSettings = tk.Frame(self, bg="#1E1E1E")
         WindowFrameSettings.pack(side=tk.TOP, fill=tk.X)
-
-####    ### Create Label for window settings frame 
-        title_label = tk.Label(WindowFrameSettings, text="<+M", bg="#1E1E1E", fg="#FFFFFF", font=("Arial", 12, "bold"))
-        title_label.pack(side="left", padx=0)
-##### F1 = MobiGlass Button 
-        self.size_toggle = 0
-        mobiglass_button = tk.Button(WindowFrameSettings, text="Mobiglass", command=self.mobiglass, bg="#7a0049", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        mobiglass_button.pack(side=tk.LEFT, padx=5)
-##### F2 = Star Map 
-
-        self.size_toggle = 0
-        map_button = tk.Button(WindowFrameSettings, text="Map", command=self.map, bg="#7a0049", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        map_button.pack(side=tk.LEFT, padx=5)
-### comlink
-# create a Comlink button
-        comlink_button = tk.Button(WindowFrameSettings, text="Comlink", command=self.comlink, bg="#7a0049", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        comlink_button.pack(side=tk.LEFT, padx=5)
-   
-#### Camera 
-        self.size_toggle = 0
-        camera_button = tk.Button(WindowFrameSettings, text="Camera", command=self.camera, bg="#7a0049", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        camera_button.pack(side=tk.LEFT, padx=5)
 
 
        ## # create a quit button for the app
@@ -114,10 +85,7 @@ class App_SCTool(tk.Tk):
         self.toggle_mode_button = tk.Button(WindowFrameSettings, text="Hide - '<+m'", command=self.handle_keybind_press, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
         self.toggle_mode_button.pack(side="right", fill="x", padx=4, pady=2)
         
-        
- 
-
-        
+       
         ###Slider 
         DefaultSliderValue = .7
         self.slider = tk.Scale(WindowFrameSettings, from_=0.2, to=1, resolution=0.1,width=10, orient="horizontal", command=self.set_transparency,showvalue=False, bg="#1E1E1E", fg="#FFFFFF", troughcolor="#565656", highlightbackground="#1E1E1E", bd=0, length=100)
@@ -129,22 +97,13 @@ class App_SCTool(tk.Tk):
         debug_commands = ["r_displayinfo 0", "r_displayinfo 1", "r_displayinfo 2", "r_displayinfo 3", "r_displayinfo 4", "r_displaySessionInfo 1", "r_displaySessionInfo 0", "r_getScreenShot 1"]
         for name, command in zip(debug_names, debug_commands):
             debug_button = tk.Button(WindowFrameSettings, text=name, command=lambda cmd=command: self.DebugButtons(cmd), bg="#922178", fg="#FFFFFF", activebackground="#922178", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-            debug_button.pack(side=tk.LEFT, padx=5)
+            debug_button.pack(side=tk.RIGHT, padx=5)
 
-
-
-
-    
 
 
 # Pack the window settings frame
         WindowFrameSettings.pack(side="top", fill="x", pady=5)
 #########################################################################
-
-
-
-       
-
 
 ### functions to allow movemet of window when in borderless mode 
     def start_move(self, event):
@@ -163,8 +122,6 @@ class App_SCTool(tk.Tk):
     def CloseApp(self):
         print("CloseAppSCTool")
         self.destroy()
-
-
 
 ## Is Called when Ctrl + M is pressed  ( will replace with M + RMB )
 

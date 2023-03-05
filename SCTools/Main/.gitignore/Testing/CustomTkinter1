@@ -1,0 +1,300 @@
+
+##### Simple Custom Tkinter Example 
+
+
+import customtkinter
+
+customtkinter.set_appearance_mode("dark")  # Modes: "System" (standard), "Dark", "Light"
+customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
+
+app = customtkinter.CTk()
+app.geometry("400x780")
+app.title("CustomTkinter simple_example.py")
+
+def button_callback():
+    print("Button click", combobox_1.get())
+
+
+def slider_callback(value):
+    progressbar_1.set(value)
+
+
+frame_1 = customtkinter.CTkFrame(master=app)
+frame_1.pack(pady=20, padx=60, fill="both", expand=True)
+
+label_1 = customtkinter.CTkLabel(master=frame_1, justify=customtkinter.LEFT)
+label_1.pack(pady=10, padx=10)
+
+progressbar_1 = customtkinter.CTkProgressBar(master=frame_1)
+progressbar_1.pack(pady=10, padx=10)
+
+button_1 = customtkinter.CTkButton(master=frame_1, command=button_callback)
+button_1.pack(pady=10, padx=10)
+
+button_name = ""
+ButtonRoundness = 150
+ButtonFunc = button_callback
+ButtonWidth = 200
+ButtonHeight = 200
+
+button_2 = customtkinter.CTkButton(master=frame_1,text=button_name,width=ButtonWidth, height=ButtonHeight, corner_radius=ButtonRoundness, command=ButtonFunc)
+button_2.pack(pady=1, padx=1)
+
+slider_1 = customtkinter.CTkSlider(master=frame_1, command=slider_callback, from_=0, to=1)
+slider_1.pack(pady=10, padx=10)
+slider_1.set(0.5)
+
+entry_1 = customtkinter.CTkEntry(master=frame_1, placeholder_text="CTkEntry")
+entry_1.pack(pady=10, padx=10)
+
+optionmenu_1 = customtkinter.CTkOptionMenu(frame_1, values=["Option 1", "Option 2", "Option 42 long long long..."])
+optionmenu_1.pack(pady=10, padx=10)
+optionmenu_1.set("CTkOptionMenu")
+
+combobox_1 = customtkinter.CTkComboBox(frame_1, values=["Option 1", "Option 2", "Option 42 long long long..."])
+combobox_1.pack(pady=10, padx=10)
+combobox_1.set("CTkComboBox")
+
+checkbox_1 = customtkinter.CTkCheckBox(master=frame_1)
+checkbox_1.pack(pady=10, padx=10)
+
+radiobutton_var = customtkinter.IntVar(value=1)
+
+radiobutton_1 = customtkinter.CTkRadioButton(master=frame_1, variable=radiobutton_var, value=1)
+radiobutton_1.pack(pady=10, padx=10)
+
+radiobutton_2 = customtkinter.CTkRadioButton(master=frame_1, variable=radiobutton_var, value=2)
+radiobutton_2.pack(pady=10, padx=10)
+
+switch_1 = customtkinter.CTkSwitch(master=frame_1)
+switch_1.pack(pady=10, padx=10)
+
+text_1 = customtkinter.CTkTextbox(master=frame_1, width=200, height=70)
+text_1.pack(pady=10, padx=10)
+text_1.insert("0.0", "CTkTextbox\n\n\n\n")
+
+segmented_button_1 = customtkinter.CTkSegmentedButton(master=frame_1, values=["CTkSegmentedButton", "Value 2"])
+segmented_button_1.pack(pady=10, padx=10)
+
+tabview_1 = customtkinter.CTkTabview(master=frame_1, width=200, height=70)
+tabview_1.pack(pady=10, padx=10)
+tabview_1.add("CTkTabview")
+tabview_1.add("Tab 2")
+
+app.mainloop()
+
+
+
+
+
+
+
+
+
+
+###### Complex Settings Menu Example / Scrollers, Checkbox, buttons 
+# import customtkinter
+# import os
+# from PIL import Image
+
+
+# class ScrollableCheckBoxFrame(customtkinter.CTkScrollableFrame):
+#     def __init__(self, master, item_list, command=None, **kwargs):
+#         super().__init__(master, **kwargs)
+
+#         self.command = command
+#         self.checkbox_list = []
+#         for i, item in enumerate(item_list):
+#             self.add_item(item)
+
+#     def add_item(self, item):
+#         checkbox = customtkinter.CTkCheckBox(self, text=item)
+#         if self.command is not None:
+#             checkbox.configure(command=self.command)
+#         checkbox.grid(row=len(self.checkbox_list), column=0, pady=(0, 10))
+#         self.checkbox_list.append(checkbox)
+
+#     def remove_item(self, item):
+#         for checkbox in self.checkbox_list:
+#             if item == checkbox.cget("text"):
+#                 checkbox.destroy()
+#                 self.checkbox_list.remove(checkbox)
+#                 return
+
+#     def get_checked_items(self):
+#         return [checkbox.cget("text") for checkbox in self.checkbox_list if checkbox.get() == 1]
+
+
+# class ScrollableRadiobuttonFrame(customtkinter.CTkScrollableFrame):
+#     def __init__(self, master, item_list, command=None, **kwargs):
+#         super().__init__(master, **kwargs)
+
+#         self.command = command
+#         self.radiobutton_variable = customtkinter.StringVar()
+#         self.radiobutton_list = []
+#         for i, item in enumerate(item_list):
+#             self.add_item(item)
+
+#     def add_item(self, item):
+#         radiobutton = customtkinter.CTkRadioButton(self, text=item, value=item, variable=self.radiobutton_variable)
+#         if self.command is not None:
+#             radiobutton.configure(command=self.command)
+#         radiobutton.grid(row=len(self.radiobutton_list), column=0, pady=(0, 10))
+#         self.radiobutton_list.append(radiobutton)
+
+#     def remove_item(self, item):
+#         for radiobutton in self.radiobutton_list:
+#             if item == radiobutton.cget("text"):
+#                 radiobutton.destroy()
+#                 self.radiobutton_list.remove(radiobutton)
+#                 return
+
+#     def get_checked_item(self):
+#         return self.radiobutton_variable.get()
+
+
+# class ScrollableLabelButtonFrame(customtkinter.CTkScrollableFrame):
+#     def __init__(self, master, command=None, **kwargs):
+#         super().__init__(master, **kwargs)
+#         self.grid_columnconfigure(0, weight=1)
+
+#         self.command = command
+#         self.radiobutton_variable = customtkinter.StringVar()
+#         self.label_list = []
+#         self.button_list = []
+
+#     def add_item(self, item, image=None):
+#         label = customtkinter.CTkLabel(self, text=item, image=image, compound="left", padx=5, anchor="w")
+#         button = customtkinter.CTkButton(self, text="Command", width=100, height=24)
+#         if self.command is not None:
+#             button.configure(command=lambda: self.command(item))
+#         label.grid(row=len(self.label_list), column=0, pady=(0, 10), sticky="w")
+#         button.grid(row=len(self.button_list), column=1, pady=(0, 10), padx=5)
+#         self.label_list.append(label)
+#         self.button_list.append(button)
+
+#     def remove_item(self, item):
+#         for label, button in zip(self.label_list, self.button_list):
+#             if item == label.cget("text"):
+#                 label.destroy()
+#                 button.destroy()
+#                 self.label_list.remove(label)
+#                 self.button_list.remove(button)
+#                 return
+
+
+# class App(customtkinter.CTk):
+#     def __init__(self):
+#         super().__init__()
+
+#         self.title("CTkScrollableFrame example")
+#         self.grid_rowconfigure(0, weight=1)
+#         self.columnconfigure(2, weight=1)
+
+#         # create scrollable checkbox frame
+#         self.scrollable_checkbox_frame = ScrollableCheckBoxFrame(master=self, width=200, command=self.checkbox_frame_event,
+#                                                                  item_list=[f"item {i}" for i in range(50)])
+#         self.scrollable_checkbox_frame.grid(row=0, column=0, padx=15, pady=15, sticky="ns")
+#         self.scrollable_checkbox_frame.add_item("new item")
+
+#         # create scrollable radiobutton frame
+#         self.scrollable_radiobutton_frame = ScrollableRadiobuttonFrame(master=self, width=500, command=self.radiobutton_frame_event,
+#                                                                        item_list=[f"item {i}" for i in range(100)],
+#                                                                        label_text="ScrollableRadiobuttonFrame")
+#         self.scrollable_radiobutton_frame.grid(row=0, column=1, padx=15, pady=15, sticky="ns")
+#         self.scrollable_radiobutton_frame.configure(width=200)
+#         self.scrollable_radiobutton_frame.remove_item("item 3")
+
+#         # create scrollable label and button frame
+#         current_dir = os.path.dirname(os.path.abspath(__file__))
+#         self.scrollable_label_button_frame = ScrollableLabelButtonFrame(master=self, width=300, command=self.label_button_frame_event, corner_radius=0)
+#         self.scrollable_label_button_frame.grid(row=0, column=2, padx=0, pady=0, sticky="nsew")
+#         for i in range(20):  # add items with images
+#             self.scrollable_label_button_frame.add_item(f"image and item {i}", image=customtkinter.CTkImage(Image.open(os.path.join(current_dir, "test_images", "chat_light.png"))))
+
+#     def checkbox_frame_event(self):
+#         print(f"checkbox frame modified: {self.scrollable_checkbox_frame.get_checked_items()}")
+
+#     def radiobutton_frame_event(self):
+#         print(f"radiobutton frame modified: {self.scrollable_radiobutton_frame.get_checked_item()}")
+
+#     def label_button_frame_event(self, item):
+#         print(f"label button frame clicked: {item}")
+
+
+# if __name__ == "__main__":
+#     customtkinter.set_appearance_mode("dark")
+#     app = App()
+#     app.mainloop()
+
+
+
+
+
+
+
+
+
+
+################## Login Example w image 
+# import customtkinter
+# from PIL import Image
+# import os
+
+# customtkinter.set_appearance_mode("dark")
+
+
+# class App(customtkinter.CTk):
+#     width = 900
+#     height = 600
+
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+
+#         self.title("CustomTkinter example_background_image.py")
+#         self.geometry(f"{self.width}x{self.height}")
+#         self.resizable(False, False)
+
+#         # load and create background image
+#         current_path = os.path.dirname(os.path.realpath(__file__))
+#         self.bg_image = customtkinter.CTkImage(Image.open(current_path + "/test_images/bg_gradient.jpg"),
+#                                                size=(self.width, self.height))
+#         self.bg_image_label = customtkinter.CTkLabel(self, image=self.bg_image)
+#         self.bg_image_label.grid(row=0, column=0)
+
+#         # create login frame
+#         self.login_frame = customtkinter.CTkFrame(self, corner_radius=0)
+#         self.login_frame.grid(row=0, column=0, sticky="ns")
+#         self.login_label = customtkinter.CTkLabel(self.login_frame, text="CustomTkinter\nLogin Page",
+#                                                   font=customtkinter.CTkFont(size=20, weight="bold"))
+#         self.login_label.grid(row=0, column=0, padx=30, pady=(150, 15))
+#         self.username_entry = customtkinter.CTkEntry(self.login_frame, width=200, placeholder_text="username")
+#         self.username_entry.grid(row=1, column=0, padx=30, pady=(15, 15))
+#         self.password_entry = customtkinter.CTkEntry(self.login_frame, width=200, show="*", placeholder_text="password")
+#         self.password_entry.grid(row=2, column=0, padx=30, pady=(0, 15))
+#         self.login_button = customtkinter.CTkButton(self.login_frame, text="Login", command=self.login_event, width=200)
+#         self.login_button.grid(row=3, column=0, padx=30, pady=(15, 15))
+
+#         # create main frame
+#         self.main_frame = customtkinter.CTkFrame(self, corner_radius=0)
+#         self.main_frame.grid_columnconfigure(0, weight=1)
+#         self.main_label = customtkinter.CTkLabel(self.main_frame, text="CustomTkinter\nMain Page",
+#                                                  font=customtkinter.CTkFont(size=20, weight="bold"))
+#         self.main_label.grid(row=0, column=0, padx=30, pady=(30, 15))
+#         self.back_button = customtkinter.CTkButton(self.main_frame, text="Back", command=self.back_event, width=200)
+#         self.back_button.grid(row=1, column=0, padx=30, pady=(15, 15))
+
+#     def login_event(self):
+#         print("Login pressed - username:", self.username_entry.get(), "password:", self.password_entry.get())
+
+#         self.login_frame.grid_forget()  # remove login frame
+#         self.main_frame.grid(row=0, column=0, sticky="nsew", padx=100)  # show main frame
+
+#     def back_event(self):
+#         self.main_frame.grid_forget()  # remove main frame
+#         self.login_frame.grid(row=0, column=0, sticky="ns")  # show login frame
+
+
+# if __name__ == "__main__":
+#     app = App()
+#     app.mainloop()

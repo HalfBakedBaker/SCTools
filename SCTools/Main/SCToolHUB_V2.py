@@ -31,7 +31,7 @@ class App_HUB(tk.Tk):
         self.is_borderless = False
         self.attributes('-topmost', 1) # Force window above all others
         self.attributes('-alpha', 1) # Set default transparency to 1
-        self.geometry("1200x25")
+        self.geometry("1425x25")
         self.create_widgets()
          # Bind right mouse button to drag the window
         self.bind("<ButtonPress-3>", self.start_move)
@@ -49,11 +49,11 @@ class App_HUB(tk.Tk):
         screen_height = self.winfo_screenheight()
         
         # Calculate the x and y position for the window
-        x = int((screen_width - 1050) / 2) # Center the window horizontally
+        x = int((screen_width - 1050) / 3) # Center the window horizontally
         y = 0 # Place the window at the top of the screen
         
         # Set the window position
-        self.geometry("1225x25+{}+{}".format(x, y))
+        self.geometry("1425x25+{}+{}".format(x, y))
 
     def handle_keybind_press(self): ## Toggle Window Visibility / Show Hide
         self.keybind_press = not self.keybind_press
@@ -92,10 +92,14 @@ class App_HUB(tk.Tk):
       
         self.button0.pack(side="left", padx=4, pady=1)
         # Create and pack the open SCTool button
-        self.button1 = tk.Button(web_buttons, text="SCTool", command=lambda: self.openSCTool(), bg="#007E9E", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+        self.button1 = tk.Button(web_buttons, text="SCTool", command=lambda: self.openSCTool(),  bg="#007E9E", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
         self.button1.pack(side="left", padx=4, pady=1)
 
 ################################################################################################################################################
+
+        # Create and pack the open Website 0 button
+        self.button0 = tk.Button(web_buttons, text="Galactapedia", command=lambda: openwebpage_process(Url="https://robertsspaceindustries.com/galactapedia"), bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+        self.button0.pack(side="left", padx=4, pady=1)
 
         # Create and pack the open Website 0 button
         self.button9 = tk.Button(web_buttons, text="Issue Council", command=lambda: openwebpage_process(Url="https://issue-council.robertsspaceindustries.com"), bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
@@ -104,6 +108,9 @@ class App_HUB(tk.Tk):
         # Create and pack the open Website 1 button
         self.button2 = tk.Button(web_buttons, text="Spectrum", command=lambda: openwebpage_process(Url="https://robertsspaceindustries.com/spectrum"), bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
         self.button2.pack(side="left", padx=4, pady=1)
+        # Create and pack the other website buttons 
+        self.button_fleetyard = tk.Button(web_buttons, text="Fleetyard", command=lambda: openwebpage_process(Url="https://fleetyards.net/hangar/"), bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+        self.button_fleetyard.pack(side="left", padx=4, pady=1)
         # Create and pack the other website buttons 
         self.button3 = tk.Button(web_buttons, text="erkul DPS", command=lambda: openwebpage_process(Url="https://www.erkul.games"), bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
         self.button3.pack(side="left", padx=4, pady=1)
@@ -254,5 +261,3 @@ if __name__ == "__main__":
     print("Mainloop Running..")
     App_HUB.OpenToolStart()
     App_HUB.mainloop()  
-
-m,m,mm,m

@@ -31,7 +31,7 @@ class App_SCQuickChat(tk.Tk):
         
 
         # Set the window position to the right of the screen
-        window_x_position = 1550#screen_width - window_width
+        window_x_position = 1550  #screen_width - window_width
         window_y_position = 500
 
         # Set the geometry of the window
@@ -52,10 +52,11 @@ class App_SCQuickChat(tk.Tk):
   
 
 # create a frame to hold the buttons for quit and debug 
-        sliderwidth =  320
+        sliderwidth =  330
         DefaultSliderValue = .7
         button_frame_debug_quit = tk.Frame(self, bg="#1E1E1E")
         button_frame_debug_quit.pack(side=tk.TOP, fill=tk.X)
+
         self.Opacityslider = tk.Scale(button_frame_debug_quit, from_=0.2, to=1,width=10, resolution=0.1, orient="horizontal", command=self.set_transparency, showvalue=False, bg="#1E1E1E", fg="#FFFFFF", troughcolor="#565656", highlightbackground="#1E1E1E", bd=0, length=sliderwidth)
         self.Opacityslider.set(DefaultSliderValue) # Set slider value to 1 by default
         self.Opacityslider.pack(side="right",  padx=10, pady=1)
@@ -80,19 +81,21 @@ class App_SCQuickChat(tk.Tk):
         # Create and pack the toggle window mode button
         self.is_borderless = False
         self.toggle_mode_button = tk.Button(windowSettingsToggleButton, text="Window Mode", command=self.toggle_mode, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        self.toggle_mode_button.pack(side="right", fill="x", padx=4, pady=2)
+        self.toggle_mode_button.pack(side="right", fill="x", padx=10, pady=2)
         
   
-        ### Hide 
-        Collapsebutton = tk.Button(windowSettingsToggleButton, text="^v", command=self.CollapseMenu, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-        Collapsebutton.pack(side="right", fill="x", padx=4, pady=1)
+        # ### Hide 
+        # Collapsebutton = tk.Button(windowSettingsToggleButton, text="^v", command=self.CollapseMenu, bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+        # Collapsebutton.pack(side="right", fill="x", padx=4, pady=1)
+
+
         #### pack the window settings button frame m,
         windowSettingsToggleButton.pack(side="top", fill="x", pady=2)
         
         
         # Create and pack the size toggle button/side bar
         self.size_toggle = 0
-        self.Sidebarbutton = tk.Button(windowSettingsToggleButton, text="Sidebar", command=self.change_window_size, width=(10),bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+        self.Sidebarbutton = tk.Button(windowSettingsToggleButton, text="Sidebar", command=self.change_window_size, width=(17),bg="#565656", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
         self.Sidebarbutton.pack(side="right", fill="x", padx=4, pady=2)
         
         #### pack the window settings button frame 
@@ -255,22 +258,22 @@ class App_SCQuickChat(tk.Tk):
         # Toggle between two different window sizes and move the window left or right
         MoveAmount = 150
         if self.size_toggle == 0:
-            self.geometry("350x550")
+            self.geometry("355x550")
             self.geometry("+{}+{}".format(self.winfo_x() + MoveAmount, self.winfo_y()))
             self.size_toggle = 1
             self.Sidebarbutton.configure(bg="#565656")
-            # self.configure(bg="blue")
+          
         else:
             self.geometry("500x550")
             self.geometry("+{}+{}".format(self.winfo_x() - MoveAmount, self.winfo_y()))
             self.size_toggle = 0
             self.Sidebarbutton.configure(bg="#0d3a63")
-            # self.configure(bg="#1E1E1E")
-            
+         
+
     def change_window_sizeStart(self):
         # toggle between two different window sizes and move the window left or right
         if self.size_toggle == 0:
-            self.geometry("350x550")
+            self.geometry("355x550")
          
             self.size_toggle = 1
         else:
@@ -527,5 +530,3 @@ app.toggle_mode() # set window mode borderless at start
 app.loadStart() # load config 
 app.update() 
 app.mainloop()
-
-m,
