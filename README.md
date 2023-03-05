@@ -1,3 +1,5 @@
+![1ExampleScreenshot](https://user-images.githubusercontent.com/71772783/222969300-9ab5e3b2-bb33-4c0b-960f-9d327dc10ce2.png)
+
 # SCTools -
 
 This is a quick 'half-baked' implementation of some tools for Star Citizen in Windows. 
@@ -27,8 +29,8 @@ Load / save Default
 
 SCTool = Open menu with pre made buttons for the following  
 
-    Debug 0,1,2,3,4,sessioninfo,screenshot
-    exit (after 3 clicks) ( types `quit[enter] into console) 
+Debug 0,1,2,3,4,sessioninfo,screenshot, emergency exit game (after 3 clicks)
     
     
+
 
