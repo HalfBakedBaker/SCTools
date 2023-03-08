@@ -11,17 +11,17 @@ There are some panels with buttons that allow you to do the following...
 
 Open websites related to Star Citizen (HUB)
 
-Websites include : 
-1.Galactapedia
-2.IssueCouncil
-3.Spectrum
-4.Fleetyards
-5.erkurlDPS
-6.SCodex
-7.SCWiki
-8.EUXTrade
-9.YouTube
-10. Search Bar to google stuff quickly 
+  Websites include : 
+  1.Galactapedia
+  2.IssueCouncil
+  3.Spectrum
+  4.Fleetyards
+  5.erkurlDPS
+  6.SCodex
+  7.SCWiki
+  8.EUXTrade
+  9.YouTube
+  10. Search Bar to google stuff quickly 
 
 ################################################################
 
@@ -29,13 +29,13 @@ Send Pre Defined Messages to chat at the click of a button (QuickChat)
 
 Steps to use it :
 
-0. Click "Delete All" button to remove all existing "ReplaceMe" buttons
-1. Enter the Text you want to send as a message 
-2.Click the "Add button"
-3.repeat steps 1 & 2 to add up to 40 messages or "chatEmotes")
-4.click "saveDefault" to remember the buttons you added next time you run it 
-5.Make sure chat is open (F12) 
-6.Click any of the buttons and it will send the name of the button as a message in chat. 
+  0. Click "Delete All" button to remove all existing "ReplaceMe" buttons
+  1. Enter the Text you want to send as a message 
+  2.Click the "Add button"
+  3.repeat steps 1 & 2 to add up to 40 messages or "chatEmotes")
+  4.click "saveDefault" to remember the buttons you added next time you run it 
+  5.Make sure chat is open (F12) 
+  6.Click any of the buttons and it will send the name of the button as a message in chat. 
 
 
 
@@ -43,12 +43,12 @@ Steps to use it :
 
 Debugging commands(SCTool)
 
-Commands include:
-1.Screenshot
-2.Session info 0
-3.Session info 1
-4/5/6/7/8. DisplayInfo 4,3,2,1,0 
-9. Quit Game (3 Clicks)
+  Commands include:
+  1.Screenshot
+  2.Session info 0
+  3.Session info 1
+  4/5/6/7/8. DisplayInfo 4,3,2,1,0 
+  9. Quit Game (3 Clicks)
 
 ################################################################
 
