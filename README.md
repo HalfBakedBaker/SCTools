@@ -9,7 +9,7 @@ I made it because it makes my life a little easier when playing.  I'm sharing it
 
 There are some panels with buttons that allow you to do the following...
 
-Open websites related to Star Citizen at click of button (HUB)
+Open websites related to Star Citizen (HUB)
 
 Websites include : 
 1.Galactapedia
