@@ -28,12 +28,16 @@ Websites include :
 Send Pre Defined Messages to chat at the click of a button (QuickChat) 
 
 Steps to use it :
+
 0. Click "Delete All" button to remove all existing "ReplaceMe" buttons
 1. Enter the Text you want to send as a message 
 2.Click the "Add button"
 3.repeat steps 1 & 2 to add up to 40 messages or "chatEmotes")
-4. Click any of the buttons and it will send the name of the button as a message in chat. 
-5.click "saveDefault" to remember the buttons you added next time you run it 
+4.click "saveDefault" to remember the buttons you added next time you run it 
+5.Make sure chat is open (F12) 
+6.Click any of the buttons and it will send the name of the button as a message in chat. 
+
+
 
 ################################################################
 
@@ -52,6 +56,8 @@ Commands include:
 show/ hide the menus by pressing the key-bind : "m"+"<" 
 Move the panels around using (right mouse button+drag)
 Change the opacity of the panels using the sliders 
+
+Ensure the game is in borderless mode otherwise it wont work 
 
 
 Download Here:
