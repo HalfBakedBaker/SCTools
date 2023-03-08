@@ -3,32 +3,59 @@
 ![1ExampleScreenshot](https://user-images.githubusercontent.com/71772783/222969300-9ab5e3b2-bb33-4c0b-960f-9d327dc10ce2.png)
 
 
-This is a quick 'half-baked' implementation of some tools for Star Citizen in Windows.
+This is a quick 'half-baked' implementation of some tools I made for Star Citizen in Windows.
 
-After crashing my ship plenty of times due to typing in chat. I decided i wanted something similar to what we have in Forza with the "Link" feature. But with the added ability to customize the words you would like to say.
+I made it because it makes my life a little easier when playing. I'm sharing it incase anyone else finds it useful 
+ 
 
-This way i can click a single button and not have to worry about accidently turning my engines off, hitting cruise control ect...
 
-Key-bind to show hide Tools & Quick chat menu is "< + m" Will move mouse to Quick-Chat when toggling visible.
 
-RMB + Drag to move the windows around
 
-Sliders to control opacity of the windows.
+There are some panels with buttons that allow you to do the following...
 
-SCHUB = menu with buttons that allows the user to open new instances of SCQuick-Chat, SC-Tool & quickly launch useful websites related to SC. (The websites are opened in the users default browser.) (am considering making a lightweight web browser for SC. But right now the default browser will do)
+Open websites related to start citizen at click of button (HUB)
 
-SCQuickChat = Allows the user to quickly send a pre defined message in chat at click of a button. (User Must have Chat open in order for it to work "F12")
+Websites include :
+1.Galactapedia
+2.IssueCouncil
+3.Spectrum
+4.Fleetyards
+5.erkurlDPS
+6.SCodex
+7.SCWiki
+8.EUXTrade
+9.YouTube
+10. Search Bar to google stuff quickly
 
-save / load buttons to a text file in a location of your choice.
-the user can open multiple instances of Quick Chat to have as many buttons as they like.
+################################################################
 
-Load / save Default Will look for text file named "Default" in folder named "Saved" then load that at start. If you wish to change the default save, there is a button in the sidebar that allows you to overwrite the default save with whatever buttons are currently displayed. It will then automatically load those buttons next time.
+Send Pre Defined Messages to chat at the click of a button (QuickChat)
 
-SCTool = Opens a menu with pre made buttons for the following:
+Steps to use it :
+0. Click "Delete All" button to remove all existing "ReplaceMe" buttons
+1. Enter the Text you want to send as a message
+2.Click the "Add button"
+3.repeat steps 1 & 2 to add up to 40 messages or "chatEmotes")
+4. Click any of the buttons and it will send the name of the button as a message in chat.
+5.click "saveDefault" to remember the buttons you added next time you run it
 
-Debug 0,1,2,3,4,sessioninfo,screenshot, emergency exit game (after 3 clicks)
+################################################################
 
-    
+Debugging commands(SCTool)
+
+Commands include:
+1.Screenshot
+2.Session info 0
+3.Session info 1
+4/5/6/7/8. DisplayInfo 4,3,2,1,0
+9. Quit Game (3 Clicks)
+
+################################################################
+
+
+show/ hide the menus by pressing the key-bind : "m"+"<"
+Move the panels around using (right mouse button+drag)
+Change the opacity of the panels using the sliders
     
 
 
