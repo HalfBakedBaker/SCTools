@@ -2,13 +2,13 @@
 # ###################################################
 
 
-import tkinter.filedialog as filedialog
+import tkinter.filedialog  # as filedialog
 import pyautogui
-import math
+# import math
 import tkinter as tk
-import multiprocessing as mp
+#import multiprocessing as mp
 import keyboard
-import threading
+# import threading
 import time
 
 class App_SCTool(tk.Tk):
@@ -19,7 +19,7 @@ class App_SCTool(tk.Tk):
         self.attributes('-alpha', 1)
         self.geometry("1400x30")
 
-        # Get screen width and heightm,
+        # Get screen width and height,
         screen_width = self.winfo_screenwidth()
         screen_height = self.winfo_screenheight()
 
