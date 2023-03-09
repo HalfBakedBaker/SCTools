@@ -2,7 +2,7 @@
 # ###################################################
 
 
-import tkinter.filedialog  # as filedialog
+
 import pyautogui
 # import math
 import tkinter as tk
