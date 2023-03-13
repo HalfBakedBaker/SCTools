@@ -56,7 +56,7 @@ class App_SCQuickChat(tk.Tk):
         button_frame_debug_quit = tk.Frame(self, bg="#1E1E1E")
         button_frame_debug_quit.pack(side=tk.TOP, fill=tk.X)
 
-        self.Opacityslider = tk.Scale(button_frame_debug_quit, from_=0.2, to=1,width=10, resolution=0.1, orient="horizontal", command=self.set_transparency, showvalue=False, bg="#1E1E1E", fg="#FFFFFF", troughcolor="#565656", highlightbackground="#1E1E1E", bd=0, length=sliderwidth)
+        self.Opacityslider = tk.Scale(button_frame_debug_quit, from_=0.2, to=1,width=10, resolution=0.01, orient="horizontal", command=self.set_transparency, showvalue=False, bg="#1E1E1E", fg="#FFFFFF", troughcolor="#565656", highlightbackground="#1E1E1E", bd=0, length=sliderwidth)
         self.Opacityslider.set(DefaultSliderValue) # Set slider value to 1 by default
         self.Opacityslider.pack(side="right",  padx=10, pady=1)
 

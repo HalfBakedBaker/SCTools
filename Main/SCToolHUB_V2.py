@@ -9,6 +9,7 @@ from tkinter import *
 import keyboard
 import time 
 import psutil
+import pyautogui
 
 
 
@@ -49,7 +50,7 @@ class App_HUB(tk.Tk):
         y = 0 # Place the window at the top of the screen
         
         # Set the window position
-        self.geometry("1425x25+{}+{}".format(x, y))
+        self.geometry("1500x25+{}+{}".format(x, y))
 
     def handle_keybind_press(self): ## Toggle Window Visibility / Show Hide
         self.keybind_press = not self.keybind_press
@@ -83,10 +84,15 @@ class App_HUB(tk.Tk):
         web_buttons.pack(side="top", fill="x")
 
 ###############################################  Redacted to improve performance. Will Show all menus at start and then toggle visibility instead of making new instances 
-        # Create and pack the open Quick Chat Tool button
-        self.button0 = tk.Button(web_buttons, text="ChatTool", command=lambda: self.openquickchat(), bg="#007E9E", fg="#FFFFFF",activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
-      
+        # Create and pack the Run Game 
+        self.button0 = tk.Button(web_buttons, text="RunSC",command=self.StartGame, bg="#158000", fg="#FFFFFF",activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
         self.button0.pack(side="left", padx=4, pady=1)
+        # Create and pack the LogViewer
+        self.LogViewbutton = tk.Button(web_buttons, text="LogViewer",command=self.open_log_monitor, bg="#158000", fg="#FFFFFF",activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+        self.LogViewbutton.pack(side="left", padx=4, pady=1)
+        # Create and pack the open Quick Chat Tool button
+        self.ChatToolbutton = tk.Button(web_buttons, text="ChatTool", command=lambda: self.openquickchat(), bg="#007E9E", fg="#FFFFFF",activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
+        self.ChatToolbutton.pack(side="left", padx=4, pady=1)
         # Create and pack the open SCTool button
         self.button1 = tk.Button(web_buttons, text="SCTool", command=lambda: self.openSCTool(),  bg="#007E9E", fg="#FFFFFF", activebackground="#303030", activeforeground="#FFFFFF", relief="flat", bd=0, font=("Arial", 10, "bold"))
         self.button1.pack(side="left", padx=4, pady=1)
@@ -160,6 +166,64 @@ class App_HUB(tk.Tk):
         # Pack the window settings frame
         window_settings.pack(side="top", fill="x", padx=1, pady=1)
         self.configure(background="#000000")
+
+
+    def open_log_monitor(self):
+        subprocess.Popen(["python", "LogMonitor.py"])
+        print("LogViewer Open")
+
+
+
+
+### This will not work for other users as the location is specific to my setup director & screen size 
+    def StartGame(self):   # Launch game  A: 720x710 B: 1110x760
+        
+        WaitFor = 90
+        
+        ax = 720
+        ay = 710
+        bx = 1110
+        by = 760
+        cx = 280
+        cy = 380
+        dx = 515
+        dy = 900
+
+        path_to_exe = r"C:\Program Files\Roberts Space Industries\RSI Launcher\RSI Launcher.exe"
+        
+#### wait for launcher to open then Launch game
+        subprocess.Popen(path_to_exe)
+        for i in range(5, 0, -1):
+            print(f"Starting Game in {i} seconds...")
+            time.sleep(1)
+        print("Game Starting..")
+
+        pyautogui.moveTo(ax,ay)
+        # left click to focus on window 
+        pyautogui.click(button='left')
+        # sleep 2 seconds
+        time.sleep(2)
+        # Move Mouse to second location
+        pyautogui.moveTo(bx,by)
+        # left click to focus on window 
+        pyautogui.click(button='left')
+
+        # Wait for game to load
+
+        for i in range(WaitFor, 0, -1):
+            print(f"PU starting in {i} seconds...")
+            time.sleep(1)
+
+
+        pyautogui.moveTo(cx,cy)
+        pyautogui.click(button='left')
+
+        time.sleep(1)
+
+        pyautogui.moveTo(dx,dy)
+        pyautogui.click(button='left')
+
+        print("Game Running...")
 
 
 
